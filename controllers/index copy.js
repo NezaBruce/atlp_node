@@ -1,6 +1,6 @@
 const express = require("express")
 const mongoose = require("mongoose") // new
-const routes=require("./routes.js")
+const routes=require("../routes/routes.js")
 const nodemailer = require('nodemailer');
 // Connect to MongoDB database
 const port = 5000;
