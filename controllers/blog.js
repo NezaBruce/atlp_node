@@ -1,13 +1,14 @@
+// const mongoose = require('mongoose')
 const express = require("express");
-const Blog = require("../models/blog.js");
-const router = express.Router();
+const Blog = require("../models/blog");
+// const router = express.Router();
 
-router.get("/blog", async (req, res) => {
+module.exports.getall= async (req, res) => {
   const Blogs = await Blog.find();
   res.send(Blogs);
-});
+};
 
-router.post("/blog", async (req, res) => {
+module.exports.createNew= async (req, res) => {
   const blog = new Blog({
     title: req.body.title,
     image: req.body.image,
@@ -15,8 +16,18 @@ router.post("/blog", async (req, res) => {
   });
   await blog.save();
   res.send(blog);
-});
-router.get("/blog/:id", async (req, res) => {
+};
+module.exports.commentblog= async (req, res) => {
+  // const blog=Blog.findOne({_id:req.params.id});
+  const {id}=req.params;
+  const {comment}=req.body;
+  const blog=await Blog.findById(id);
+blog.comments.push(comment);
+const commentedBlog=await Blog.findByIdAndUpdate(id,blog,{new:true});
+  // await blog.save();
+  res.send(commentedBlog);
+};
+module.exports.getone = async (req, res) => {
   try {
     const blog = await Blog.findOne({ _id: req.params.id });
     res.send(blog);
@@ -24,9 +35,9 @@ router.get("/blog/:id", async (req, res) => {
     res.status(404);
     res.send({ error: "Post doesn't exist!" });
   }
-});
+};
 
-router.patch("/blog/:id", async (req, res) => {
+module.exports.updateblog=  async (req, res) => {
   try {
     const blog = await Blog.findOne({ _id: req.params.id });
 
@@ -47,9 +58,9 @@ router.patch("/blog/:id", async (req, res) => {
     res.status(404);
     res.send({ error: "Post doesn't exist!" });
   }
-});
+};
 
-router.delete("/blog/:id", async (req, res) => {
+module.exports.deleteblog=  async (req, res) => {
   try {
     await Blog.deleteOne({ _id: req.params.id });
     res.status(204).send();
@@ -57,5 +68,4 @@ router.delete("/blog/:id", async (req, res) => {
     res.status(404);
     res.send({ error: "Blog doesn't exist!" });
   }
-});
-module.exports = router;
+};

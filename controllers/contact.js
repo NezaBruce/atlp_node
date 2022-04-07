@@ -1,13 +1,13 @@
 const express = require("express");
-const Post = require("../models/post copy");
+const Post = require("../../garbage/post copy");
 const router = express.Router();
 
-router.get("/posts", async (req, res) => {
+router.get("/contact", async (req, res) => {
   const posts = await Post.find();
   res.send(posts);
 });
 
-router.post("/posts", async (req, res) => {
+router.post("/contact", async (req, res) => {
   const post = new Post({
     name: req.body.name,
     email: req.body.email,
