@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User=require("../models/user");
+const {validateUser}=require("../models/user");
 const bcrypt=require("bcryptjs");
 const auth = require("../middlewares/autha");
 const jwt=require('jsonwebtoken');
@@ -10,6 +11,11 @@ router.get("/reg",async(req,res)=>{
 })
 router.post('/reg',async (req,res)=>{
     try{
+        const {error}= validateUser(req.body);
+        // res.send("hi")
+        if(error){  
+          res.send(error.details[0].message);
+      }
         //get user input
         // const {first_name,last_name,email,password}=req.body;
         const first_name=req.body.first_name;
@@ -63,11 +69,13 @@ router.post('/log',async (req,res)=>{
             const token = await jwt.sign({user_id:user._id,email},"key");
             user.token=token;
             res.status(201).send(user);
-        }
-        //encrypt user password
-           
+        }else{
+     //encrypt user password
+            
         //save token
         res.status(201).send("user");
+        }
+   
     }catch(err){
         res.send(err);
     }
@@ -85,5 +93,26 @@ router.post("/welcome", auth,async (req, res) => {
     // }
     // };
 });
-
+router.patch("/profile/:id",auth,async(req,res)=>{
+      try {
+          const user = await User.findOne({ _id: req.params.id }); 
+          email
+          if (req.body.first_name) {
+            user.first_name = req.body.first_name;
+          }
+      
+          if (req.body.last_name) {
+            user.last_name = req.body.last_name;
+          }
+          if (req.body.email) {
+            blog.email = req.body.email;
+          }
+      
+          await user.save();
+          res.send(user);
+        } catch {
+          res.status(404);
+          res.send({ error: "user doesn't exist!" });
+        }
+})
 module.exports=router;

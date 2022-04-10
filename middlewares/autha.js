@@ -9,12 +9,13 @@ const verifyToken=async(req,res,next)=>{
     //    get token
     const bearerToken=bearer[1];
     req.token=bearerToken;
-    await jwt.verify(req.token,"key")
+    const data=await jwt.verify(req.token,"key");
+    req.user=data;
+    console.log(data);
     next();
-
    }
    else{
-       res.sendStatus(404)
+       res.send("Authentication needed");
    }
 }
 module.exports=verifyToken;

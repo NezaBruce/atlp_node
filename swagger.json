@@ -33,7 +33,7 @@
             "name": "id",
             "in": "query",
             "required": true,
-            "description": "Id of the user which is to be searched",
+            "description": "Id of the blog which is to be searched",
             "type": "integer"
           }
         ],
@@ -56,8 +56,8 @@
       }
     },
     "definitions": {
-      "User": {
-        "required": ["name", "_id", "companies"],
+      "Blog": {
+        "required": ["title", "_id", "companies"],
         "properties": {
           "id": {
             "type": "integer",
@@ -91,27 +91,10 @@
           },
           "phone": {
             "type": "string"
-          },
-          "website": {
-            "type": "string"
-          },
-          "company": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "catchPhrase": {
-                "type": "string"
-              },
-              "bs": {
-                "type": "string"
-              }
-            }
           }
         }
       },
-      "Users": {
+      "Blogs": {
         "type": "array",
         "$ref": "#/definitions/User"
       }

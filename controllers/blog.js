@@ -2,17 +2,26 @@
 const express = require("express");
 const Blog = require("../models/blog");
 // const router = express.Router();
-
+const {validateBlog}=require('../models/blog')
 module.exports.getall= async (req, res) => {
   const Blogs = await Blog.find();
   res.send(Blogs);
 };
 
 module.exports.createNew= async (req, res) => {
+  const {error}= validateBlog(req.body);
+  // res.send("hi")
+  if(error){  
+    res.send(error.details[0].message);
+}
   const blog = new Blog({
     title: req.body.title,
     image: req.body.image,
     content: req.body.content,
+    author: {
+      _id:req.user.user_id,
+      name:req.user.email,
+    },
   });
   await blog.save();
   res.send(blog);
@@ -21,11 +30,37 @@ module.exports.commentblog= async (req, res) => {
   // const blog=Blog.findOne({_id:req.params.id});
   const {id}=req.params;
   const {comment}=req.body;
-  const blog=await Blog.findById(id);
-blog.comments.push(comment);
-const commentedBlog=await Blog.findByIdAndUpdate(id,blog,{new:true});
-  // await blog.save();
+  const us=req.user.user_id;
+const commentedBlog=await Blog.findByIdAndUpdate(id,{
+ $push:{
+   comments:{
+     user:us,
+     comments:comment,
+   }
+  } 
+},{new:true});
+  // await blog.save();   
   res.send(commentedBlog);
+};
+module.exports.likeblog= async (req, res) => {
+  // const blog=Blog.findOne({_id:req.params.id});
+  const {id}=req.params;
+  const {like}=req.body;
+  const blog=await Blog.findById(id);
+  const us=req.user.user_id;
+// blog.like =blog.like + like;
+// blog.like.push(us);
+if(blog){
+if(!blog.like.includes(req.user.user_id)){
+  await Blog.updateOne({_id:id},{
+   $push:{like:req.user.user_id}
+  });
+return res.send("liked");
+}
+return res.send();
+}
+// return likedBlog
+  // await blog.save();
 };
 module.exports.getone = async (req, res) => {
   try {
@@ -38,6 +73,11 @@ module.exports.getone = async (req, res) => {
 };
 
 module.exports.updateblog=  async (req, res) => {
+  const {error}= validateBlog(req.body);
+  // res.send("hi")
+  if(error){  
+    res.send(error.details[0].message);
+}
   try {
     const blog = await Blog.findOne({ _id: req.params.id });
 
