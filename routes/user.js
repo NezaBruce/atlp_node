@@ -68,7 +68,8 @@ router.post('/log',async (req,res)=>{
             // res.status(409).send("User already Exits"); ,{expiresIn:"4h"}
             const token = await jwt.sign({user_id:user._id,email},"key");
             user.token=token;
-            res.status(201).send(user);
+            res.status(200).send({user});
+            // res.send("login successfully");
         }else{
      //encrypt user password
             
@@ -96,7 +97,8 @@ router.post("/welcome", auth,async (req, res) => {
 router.patch("/profile/:id",auth,async(req,res)=>{
       try {
           const user = await User.findOne({ _id: req.params.id }); 
-          email
+        //   email
+        console.log("g")
           if (req.body.first_name) {
             user.first_name = req.body.first_name;
           }
@@ -112,7 +114,66 @@ router.patch("/profile/:id",auth,async(req,res)=>{
           res.send(user);
         } catch {
           res.status(404);
-          res.send({ error: "user doesn't exist!" });
+        //   res.send({ error: "user doesn't exist!" });
         }
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Redirect the user to the Google signin page 
+// app.get(
+//     "/auth/google",
+//     passport.authenticate("google", { scope: ["email", "profile"] })
+//    );
+//    // Retrieve user data using the access token received 
+//    app.get(
+//     "/auth/google/callback",
+//     passport.authenticate("google", { session: false }),
+//     (req, res) => {
+//     res.redirect("/profile/");
+//     }
+//    );
+//    // profile route after successful sign in 
+//    app.get("/profile", (req, res) => {
+//     console.log(req);
+//     res.send("Welcome");
+//    });
+
+
+
+
+
+
+
+
+
+
 module.exports=router;

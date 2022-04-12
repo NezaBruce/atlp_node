@@ -21,7 +21,7 @@
             "200": {
               "description": "ok",
               "schema": {
-                "$ref": "#/definitions/Users"
+                "$ref": "#/definitions/Blog"
               }
             }
           }
@@ -63,33 +63,19 @@
             "type": "integer",
             "uniqueItems": true
           },
-          "name": {
+          "title": {
             "type": "string"
           },
-          "username": {
+          "image": {
             "type": "string"
           },
-          "email": {
+          "content": {
             "type": "string"
           },
-          "address": {
-            "type": "object",
-            "properties": {
-              "street": {
-                "type": "string"
-              },
-              "suite": {
-                "type": "string"
-              },
-              "city": {
-                "type": "string"
-              },
-              "zipcode": {
-                "type": "string"
-              }
-            }
+          "author": {
+            "type": "string"
           },
-          "phone": {
+          "comments": {
             "type": "string"
           }
         }
