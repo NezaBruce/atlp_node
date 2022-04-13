@@ -24,14 +24,14 @@ const swaggerUi = require("swagger-ui-express"),
         // app.use("/", auth);
         // app.route("/").get("hello");
         app.get("/",(req,res)=>res.send("hello"))
-        app.use("/comment", comment);
-        app.use("/contact", routes);
-        app.route("/blog").get(book.getBooks);
-        app.route("/blogs").post(book.postBook);
-    app.route("/blog/:id")
-        .get(book.getBook)
-        .delete(book.deleteBook)
-        .put(book.updateBook);
+    //     app.use("/comment", comment);
+    //     app.use("/contact", routes);
+    //     app.route("/blog").get(book.getBooks);
+    //     app.route("/blogs").post(book.postBook);
+    // app.route("/blog/:id")
+    //     .get(book.getBook)
+    //     .delete(book.deleteBook)
+    //     .put(book.updateBook);
         // app.get(
         //   "/auth/google/callback",
         //   passport.authenticate("google", { session: false }),
