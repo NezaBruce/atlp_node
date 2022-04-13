@@ -38,6 +38,7 @@ router.post('/reg',async (req,res)=>{
             last_name:last_name,
             email:email.toLowerCase(),
             password:encryptedPassword
+            // isadmin:true
         });
         //create token
         // const token = await jwt.sign({user_id:user._id,email},"key",{expiresIn:"4h"});
@@ -46,7 +47,7 @@ router.post('/reg',async (req,res)=>{
         await user.save();
         res.status(201).send(user);
     }catch(err){
-        res.send(err);
+        console.log(err);
     }
 })
 router.post('/log',async (req,res)=>{
@@ -66,7 +67,7 @@ router.post('/log',async (req,res)=>{
         const encryptedPassword=await bcrypt.hash(password,10); 
         if(user && (await bcrypt.compare(password,user.password))){
             // res.status(409).send("User already Exits"); ,{expiresIn:"4h"}
-            const token = await jwt.sign({user_id:user._id,email},"key");
+            const token = await jwt.sign({user_id:user._id,email,username:user.first_name,isadmin:user.isadmin},"key");
             user.token=token;
             res.status(200).send({user});
             // res.send("login successfully");

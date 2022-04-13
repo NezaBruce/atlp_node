@@ -1,5 +1,5 @@
 const express = require("express");
-const Post = require("../models/post copy");
+const Post = require("../models/contact");
 const router = express.Router();
 
 router.get("/contact", async (req, res) => {
