@@ -22,7 +22,8 @@ const swaggerUi = require("swagger-ui-express"),
         app.use(express.json());
         app.use("/blog", routes1);
         // app.use("/", auth);
-        app.route("/").get("hello");
+        // app.route("/").get("hello");
+        app.get("/",(req,res)=>res.send("hello"))
         app.use("/comment", comment);
         app.use("/contact", routes);
         app.route("/blog").get(book.getBooks);
