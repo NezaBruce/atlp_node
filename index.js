@@ -25,10 +25,10 @@ const swaggerUi = require("swagger-ui-express"),
         app.set('views', path.join(__dirname, 'views'))
         app.set('view engine', 'ejs')
         app.get('/', (req, res) => res.render('pages/index'))
-        app.use("/blog", routes1);
+        // app.use("/blog", routes1);
         // app.use("/", auth);
         // app.route("/").get("hello");
-        app.get("/",(req,res)=>res.send("hello"))
+        // app.get("/",(req,res)=>res.send("hello"))
     //     app.use("/comment", comment);
     //     app.use("/contact", routes);
     //     app.route("/blog").get(book.getBooks);
@@ -63,7 +63,7 @@ const swaggerUi = require("swagger-ui-express"),
         //   res.send("Welcome");
         //  });
 		app.listen(port, () => {
-			console.log("Server has started on: " + port);
+			console.log("Server has started on:{http://localhost:7000} " + port);
 		})
 	})
   // app.route('/bo')
