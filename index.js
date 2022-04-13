@@ -7,6 +7,7 @@ const auth=require("./routes/user")
 const nodemailer = require('nodemailer');
 const jwt = require("jsonwebtoken")
 let book = require('./routes/book');
+const path = require('path')
 // Connect to MongoDB database
 // const passport = require("passport");
 // require("./passport/passportConfig")(passport);
@@ -20,6 +21,10 @@ const swaggerUi = require("swagger-ui-express"),
 	  
 	  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
         app.use(express.json());
+        app.use(express.static(path.join(__dirname, 'public')))
+        app.set('views', path.join(__dirname, 'views'))
+        app.set('view engine', 'ejs')
+        app.get('/', (req, res) => res.render('pages/index'))
         app.use("/blog", routes1);
         // app.use("/", auth);
         // app.route("/").get("hello");
