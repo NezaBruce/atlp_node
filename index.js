@@ -1,12 +1,12 @@
 const express = require("express")
 const mongoose = require("mongoose") // new
-const routes=require("./controllers/contact")
-const routes1=require("./routes/blog");
-const comment=require("./controllers/comment")
-const auth=require("./routes/user")
-const nodemailer = require('nodemailer');
-const jwt = require("jsonwebtoken")
-let book = require('./routes/book');
+// const routes=require("./controllers/contact")
+// const routes1=require("./routes/blog");
+// const comment=require("./controllers/comment")
+// const auth=require("./routes/user")
+// const nodemailer = require('nodemailer');
+// const jwt = require("jsonwebtoken")
+// let book = require('./routes/book');
 const path = require('path')
 // Connect to MongoDB database
 // const passport = require("passport");
