@@ -23,9 +23,9 @@ const swaggerUi = require("swagger-ui-express")
         app.use(express.static(path.join(__dirname, 'public')))
         app.set('views', path.join(__dirname, 'views'))
         app.set('view engine', 'ejs');
-        // app.get('/', (req, res) => res.render('pages/index'))
+        app.get('/', (req, res) => res.render('pages/index'))
         // app.use("/blog", routes1);
-        app.use("/", auth);
+        // app.use("/", auth);
         // app.route("/").get("hello");
         // app.get("/",(req,res)=>res.send("hello"))
     //     app.use("/comment", comment);
