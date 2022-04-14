@@ -1,13 +1,13 @@
 const express = require("express");
 const { Server } = require("http");
 const mongoose = require("mongoose") // new
-// const routes=require("./controllers/contact")
-// const routes1=require("./routes/blog");
-// const comment=require("./controllers/comment")
-// const auth=require("./routes/user")
-// const nodemailer = require('nodemailer');
-// const jwt = require("jsonwebtoken")
-// let book = require('./routes/book');
+const routes=require("./controllers/contact")
+const routes1=require("./routes/blog");
+const comment=require("./controllers/comment")
+const auth=require("./routes/user")
+const nodemailer = require('nodemailer');
+const jwt = require("jsonwebtoken")
+let book = require('./routes/book');
 const path = require('path')
 // Connect to MongoDB database
 // const passport = require("passport");
@@ -25,9 +25,9 @@ const swaggerUi = require("swagger-ui-express"),
         app.use(express.static(path.join(__dirname, 'public')))
         app.set('views', path.join(__dirname, 'views'))
         app.set('view engine', 'ejs');
-        app.get('/', (req, res) => res.render('pages/index'))
+        // app.get('/', (req, res) => res.render('pages/index'))
         // app.use("/blog", routes1);
-        // app.use("/", auth);
+        app.use("/", auth);
         // app.route("/").get("hello");
         // app.get("/",(req,res)=>res.send("hello"))
     //     app.use("/comment", comment);
