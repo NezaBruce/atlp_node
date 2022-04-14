@@ -1,66 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <%- include ("../partials/header.ejs") %>
-</head>
-
-<body>
-
-  <%- include ("../partials/nav.ejs") %>
-
-<div class="jumbotron text-center">
-  <div class="container">
-    <a href="/" class="lang-logo">
-      <img src="/lang-logo.png">
-    </a>
-    <h1>Getting Started on Heroku with Node.js</h1>
-    <p>This is a sample Node application deployed to Heroku. It's a reasonably simple app - but a good foundation for understanding how to get the most out of the Heroku platform.</p>
-    <a type="button" class="btn btn-lg btn-default" href="https://devcenter.heroku.com/articles/getting-started-with-nodejs"><span class="glyphicon glyphicon-flash"></span> Getting Started on Heroku with Node.js</a>
-    <a type="button" class="btn btn-lg btn-primary" href="https://github.com/heroku/node-js-getting-started"><span class="glyphicon glyphicon-download"></span> Source on GitHub</a>
-  </div>
-</div>
-<div class="container">
-  <div class="alert alert-info text-center" role="alert">
-    To deploy your own copy, and learn the fundamentals of the Heroku platform, head over to the <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs" class="alert-link">Getting Started on Heroku with Node.js</a> tutorial.
-  </div>
-  <hr>
-  <div class="row">
-    <div class="col-md-6">
-      <h3><span class="glyphicon glyphicon-info-sign"></span> How this sample app works</h3>
-      <ul>
-        <li>This app was deployed to Heroku, either using Git or by using <a href="https://github.com/heroku/node-js-getting-started">Heroku Button</a> on the repository.</li>
-
-        <li>When Heroku received the source code, it fetched all the dependencies in the <a href="https://github.com/heroku/node-js-getting-started/blob/main/package.json">package.json</a>, creating a deployable slug.</li>
-        <li>The platform then spins up a dyno, a lightweight container that provides an isolated environment in which the slug can be mounted and executed.</li>
-        <li>You can scale your app, manage it, and deploy over <a href="https://addons.heroku.com/">150 add-on services</a>, from the Dashboard or CLI.</li>
-      </ul>
-    </div>
-    <div class="col-md-6">
-      <h3><span class="glyphicon glyphicon-link"></span> Next Steps</h3>
-      <ul>
-        <li>If you are following the <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs">Getting Started</a> guide, then please head back to the tutorial and follow the next steps!</li>
-        <li>If you deployed this app by deploying the Heroku Button, then in a command line shell, run:</li>
-        <ul>
-          <li><code>git clone https://github.com/heroku/node-js-getting-started.git</code> - this will create a local copy of the source code for the app</li>
-          <li><code>cd node-js-getting-started</code> - change directory into the local source code repository</li>
-          <li><code>heroku git:remote -a &lt;your-app-name></code> - associate the Heroku app with the repository</li>
-          <li>You'll now be set up to run the app locally, or <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs#push-local-changes">deploy changes</a> to Heroku</li>
-        </ul>
-      </ul>
-      <h3><span class="glyphicon glyphicon-link"></span> Helpful Links</h3>
-      <ul>
-        <li><a href="https://www.heroku.com/home">Heroku</a></li>
-        <li><a href="https://devcenter.heroku.com/">Heroku Dev Center</a></li>
-        <li><a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs">Getting Started on Heroku with Node.js</a></li>
-        <li><a href="https://devcenter.heroku.com/articles/deploying-nodejs">Deploying Node Apps on Heroku</a></li>
-      </ul>
-    </div>
-  </div> <!-- row -->
-   <div class="alert alert-info text-center" role="alert">
-    Please do work through the Getting Started guide, even if you do know how to build such an application.  The guide covers the basics of working with Heroku, and will familiarize you with all the concepts you need in order to build and deploy your own apps.
-  </div>
-</div>
-
-
-</body>
+   <head>
+      <meta charset="utf-8">
+      <title>Heroku Node App Deployment</title>
+      <!-- description text that displays below the link in google search results -->
+      <meta name="description" content="Description of site" />
+      <style>
+         header:after, nav:after, footer:after, .module-block:after, .gallery:after, .social:after{content:".";display:block;height:0;clear:both;visibility:hidden;} *{margin:0;padding:0;} body{font-size:16px;line-height:1.5;font-family:'Josefin Sans', sans-serif;color:#272727;background:rgb(247, 251, 252);background:-moz-linear-gradient(top, rgba(247, 251, 252, 1) 0%, rgba(217, 237, 242, 1) 40%, rgba(173, 217, 228, 1) 100%);background:-webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(247, 251, 252, 1)), color-stop(40%, rgba(217, 237, 242, 1)), color-stop(100%, rgba(173, 217, 228, 1)));background:-webkit-linear-gradient(top, rgba(247, 251, 252, 1) 0%, rgba(217, 237, 242, 1) 40%, rgba(173, 217, 228, 1) 100%);background:-o-linear-gradient(top, rgba(247, 251, 252, 1) 0%, rgba(217, 237, 242, 1) 40%, rgba(173, 217, 228, 1) 100%);background:-ms-linear-gradient(top, rgba(247, 251, 252, 1) 0%, rgba(217, 237, 242, 1) 40%, rgba(173, 217, 228, 1) 100%);background:linear-gradient(top, rgba(247, 251, 252, 1) 0%, rgba(217, 237, 242, 1) 40%, rgba(173, 217, 228, 1) 100%);} header, footer, article, section, nav{display:block;} img{border-radius:100%;max-width:100%;display:block;} a{color:#D24655;text-decoration:none;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;transition:all .3s ease-in-out;} a:hover, a:focus{color:#000;} a img{border:none;} h1{font-size:50px;margin:0;color:#000;font-weight:normal;line-height:1;} h2{font-size:24px;letter-spacing:2px;text-transform:uppercase;font-weight:normal;margin:0 0 24px;line-height:1;} h3{font-size:30px;font-weight:normal;margin:0 0 24px;line-height:1;} p{font-family:'Vollkorn', serif;margin-bottom:24px;} header{margin:20px 40px 60px;} header div{margin-top:40px;width:60%;float:left;} header p{color:#272727;font-size:18px;margin:0;font-family:'Josefin Sans', sans-serif;} nav{float:right;width:40%;} nav ul{float:right;} nav li{float:left;list-style:none;padding:4px 0;} nav a{color:#565656;display:block;font-size:12px;margin:5px 2px;padding:10px 10px 8px;text-transform:uppercase;font-weight:bold;letter-spacing:1px;border-right:1px dashed rgba(0, 0, 0, .3);} nav li:last-child a{border-right:none;} nav a:hover, nav a:focus{text-decoration:none;background-color:#f0f0f0;border-color:transparent;} .up{margin-top:50px;} .up a{background:rgba(0, 0, 0, .25);font-size:30px;padding:12px 10px;border-radius:10px;text-shadow:1px 1px 2px #fff;} .up a:hover, .up a:focus{color:rgba(0, 0, 0, .45);text-decoration:none;} img.right{float:right;margin:0 0 20px 20px;} .social li{float:left;list-style:none;} .social a{display:block;font-size:12px;margin:5px 2px;padding:10px 10px 8px;text-transform:uppercase;font-weight:bold;letter-spacing:1px;border-right:1px dashed rgba(0, 0, 0, .1);} .social li:last-child a{border:none;} .post{position:relative;margin-bottom:50px;padding-left:24%;} .post h3{margin-bottom:10px;} .post img{width:20%;position:absolute;left:0;top:0;border-radius:0;} .date{display:block;margin-bottom:10px;} .gallery li{float:left;list-style:none;width:21%;margin:0 5.3333% 20px 0;} .gallery li:nth-child(4n){margin-right:0;} .gallery a{display:block;} .gallery a img{-webkit-transition:all 0.5s ease-in-out;-moz-transition:all 0.5s ease-in-out;-ms-transition:all 0.5s ease-in-out;-o-transition:all 0.5s ease-in-out;transition:all 0.5s ease-in-out;} .gallery a:hover img, .gallery a:focus img{-webkit-transform:scale(1.1);-moz-transform:scale(1.1);-ms-transform:scale(1.1);-o-transform:scale(1.1);transform:scale(1.1);} .page-wrap{max-width:960px;padding:0 20px;margin:0 auto;} .module-block{background-color:#fff;margin:0 0 70px 0;padding:40px;-webkit-box-shadow:inset 0px 0px 13px rgba(68, 68, 68, 0.1);-moz-box-shadow:inset 0px 0px 13px rgba(68, 68, 68, 0.1);box-shadow:inset 0px 0px 13px rgba(68, 68, 68, 0.1);border:1px solid rgba(0, 0, 0, .1);} .module-block h2{padding-bottom:30px;margin-bottom:30px;border-bottom:1px dashed rgba(0, 0, 0, .3);}
+      </style>
+   </head>
+   <body>
+      <section class="page-wrap">
+         <header>
+            <div>
+               <h1>My brand</h1>
+            </div>
+         </header>
+         <article id="block1" class="module-block">
+            <img class="right" src="http://placehold.it/150"/>
+            <ul class="social">
+               <li><a href="/">Home</a></li>
+               <li><a href="/api-docs">Swagger</a></li>
+            </ul>
+         </article>
+      </section>
+      <!-- page-wrap -->
+   </body>
 </html>
