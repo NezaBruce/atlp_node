@@ -1,4 +1,5 @@
-const express = require("express")
+const express = require("express");
+const { Server } = require("http");
 const mongoose = require("mongoose") // new
 // const routes=require("./controllers/contact")
 // const routes1=require("./routes/blog");
@@ -11,14 +12,14 @@ const path = require('path')
 // Connect to MongoDB database
 // const passport = require("passport");
 // require("./passport/passportConfig")(passport);
-const port = 7000;
+const port = process.env.PORT ||  7000;
 const app = express()
 const swaggerUi = require("swagger-ui-express"),
   swaggerDoc = require("./swagger.json");
   mongoose
   .connect("mongodb+srv://bruce:bruce@cluster0.exmgv.mongodb.net/acmedb?retryWrites=true&w=majority", { useNewUrlParser: true })
   .then(() => {
-	  
+	  // Server.listen
 	  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
         app.use(express.json());
         app.use(express.static(path.join(__dirname, 'public')))
