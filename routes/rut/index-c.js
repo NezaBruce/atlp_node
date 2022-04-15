@@ -5,7 +5,7 @@ const paginate = require("express-paginate");
 const passport = require("passport");
 const { connect } = require("mongoose");
 const swaggerUi = require("swagger-ui-express");
-const swaggerFile = require("./swagger_output.json");
+const swaggerFile = require("../../swagger_output.json");
 
 const app = express();
 const router = require("./routes/index");
