@@ -21,7 +21,7 @@ import swaggerUIExpress from "swagger-ui-express"
   .connect("mongodb+srv://bruce:bruce@cluster0.exmgv.mongodb.net/acmedb?retryWrites=true&w=majority", { useNewUrlParser: true })
   .then(() => {
 	  // Server.listen
-    
+    //git push origin --delete config
 	  // app.use("/api-docs", swaggerUIExpress.serve, swaggerUIExpress.setup(swaggerFile));
         app.use(express.json());
         app.use(express.static(path.join(__dirname, 'public')))
