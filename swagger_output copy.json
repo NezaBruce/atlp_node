@@ -30,7 +30,7 @@
     "/auth/login": {
       "post": {
         "tags": [
-          "bruce"
+          "Auth"
         ],
         "description": "",
         "parameters": [
@@ -362,7 +362,23 @@
         ]
       }
     },
-
+    "/api/stories/top": {
+      "get": {
+        "tags": [
+          "Blogs"
+        ],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/api/stories/{id}": {
       "put": {
         "tags": [

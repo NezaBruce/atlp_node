@@ -1,19 +1,28 @@
-const express = require("express");
-const Post = require("../models/contact");
-const router = express.Router();
+import express from 'express';
+import contactModel from '../models/contact.js';
+const contact = express.Router();
 
-router.get("/contact", async (req, res) => {
-  const posts = await Post.find();
-  res.send(posts);
+contact.get("/contact",  (req, res) => {
+  const query = contactModel.find({});
+  query.exec((err, contacts) => {
+    if(err) res.send(err);
+    res.json(contacts);
+});
 });
 
-router.post("/contact", async (req, res) => {
-  const post = new Post({
+contact.post("/contact", (req, res) => {
+  const post = new contactModel({
     name: req.body.name,
     email: req.body.email,
     message: req.body.message,
   });
-  await post.save();
-  res.send(post);
+post.save((err,contact) => {
+    if(err) {
+        res.send(err);
+    }
+    else { 
+       res.json({message: "Contact successfully added!", contact });
+    }
 });
-module.exports = router;
+});
+export default contact;

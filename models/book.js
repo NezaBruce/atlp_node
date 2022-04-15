@@ -1,12 +1,13 @@
-let mongoose = require('mongoose');
+import mongoose from "mongoose"
 // let Schema = mongoose.Schema;
 const BookSchema = mongoose.Schema({
     title: { type: String, required: true },
-    author: { type: String, required: true },
-    year: { type: Number, required: true },
-    pages: { type: Number, required: true, min: 1 },
+    image: { type: String, required: true },
+    content: { type: String, required: true },
+    author: { type: Number, required: true},
     createdAt: { type: Date, default: Date.now },    
   }
+  
 //   , 
 //   { 
 //     versionKey: false
@@ -20,4 +21,44 @@ const BookSchema = mongoose.Schema({
 //   }
 //   next();
 // });
-module.exports = mongoose.model('book', BookSchema);
+const Book = mongoose.model('book', BookSchema);
+export default Book;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// title: { type: String, required: true },
+// author: { type: String, required: true },
+// year: { type: Number, required: true },
+// pages: { type: Number, required: true, min: 1 },
+// createdAt: { type: Date, default: Date.now },    

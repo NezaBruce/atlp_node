@@ -1,7 +1,6 @@
-const jwt=require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 const verifyToken=async(req,res,next)=>{
     // const token=req.body.token || req.query.token || req.headers["x-access-token"];
-
     const bearerHeader=req.headers['authorization'];
    if(typeof bearerHeader !== "undefined"){
        //split at the space
@@ -18,4 +17,4 @@ const verifyToken=async(req,res,next)=>{
        res.send("Authentication needed");
    }
 }
-module.exports=verifyToken;
+export default verifyToken;

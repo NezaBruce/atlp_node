@@ -1,4 +1,5 @@
-const express=require('express');
+import express from 'express';
+ 
 
 const isAdmin =  (req, res, next) => {     
   // const { error } = Joi.validate(req.body, schema); 
@@ -10,4 +11,4 @@ const isAdmin =  (req, res, next) => {
    res.status(404).json({ error: "Access denied" }) 
   } 
   } 
-module.exports = isAdmin;
+  export default isAdmin;

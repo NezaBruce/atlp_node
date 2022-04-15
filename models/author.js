@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from "mongoose"
 
 const BlogSchema =  mongoose.Schema({
   name: String,
@@ -6,7 +6,7 @@ const BlogSchema =  mongoose.Schema({
 
 const Author = mongoose.model('author', BlogSchema)
 
-module.exports = Author;
+export default Author;
 
 // var commentSchema = new Schema({
 //     comment: {type: String},

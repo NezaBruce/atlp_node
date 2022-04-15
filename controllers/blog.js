@@ -1,32 +1,36 @@
 // const mongoose = require('mongoose')
-const express = require("express");
-const Blog = require("../models/blog");
+import express from 'express';
+import Blog from "../models/blog.js";
 // const router = express.Router();
-const {validateBlog}=require('../models/blog')
-module.exports.getall= async (req, res) => {
-  const Blogs = await Blog.find();
-  res.send(Blogs);
+import {validateBlog} from '../models/blog.js'
+export const getall= (req, res) => {
+  let query = Blog.find({});
+  query.exec((err, Blogs) => {
+    if(err) res.send(err);
+    res.json(Blogs);
+});
 };
 
-module.exports.createNew= async (req, res) => {
-  const {error}= validateBlog(req.body);
-  // res.send("hi")
-  if(error){  
-    res.send(error.details[0].message);
-}
-  const blog = new Blog({
+export const createNew= (req, res) => {
+//   const {error}= validateBlog(req.body);
+//   if(error){  
+//     res.send(error.details[0].message);
+// }
+  var blog = new Blog({
     title: req.body.title,
     image: req.body.image,
     content: req.body.content,
-    author: {
-      _id:req.user.user_id,
-      name:req.user.email,
-    },
   });
-  await blog.save();
-  res.send(blog);
+ blog.save(((err,blog) => {
+    if(err) {
+        res.send(err);
+    }
+    else {
+        res.json({message: "Blog successfully added!", blog });
+    }
+}))
 };
-module.exports.commentblog= async (req, res) => {
+export const commentblog= async (req, res) => {
   // const blog=Blog.findOne({_id:req.params.id});
   const {id}=req.params;
   const {comment}=req.body;
@@ -42,7 +46,7 @@ const commentedBlog=await Blog.findByIdAndUpdate(id,{
   // await blog.save();   
   res.send(commentedBlog);
 };
-module.exports.likeblog= async (req, res) => {
+export const likeblog= async (req, res) => {
   // const blog=Blog.findOne({_id:req.params.id});
   const {id}=req.params;
   const {like}=req.body;
@@ -62,50 +66,41 @@ return res.send();
 // return likedBlog
   // await blog.save();
 };
-module.exports.getone = async (req, res) => {
+export const getone = async (req, res) => {
   try {
-    const blog = await Blog.findOne({ _id: req.params.id });
-    res.send(blog);
-  } catch {
-    res.status(404);
-    res.send({ error: "Post doesn't exist!" });
-  }
-};
-
-module.exports.updateblog=  async (req, res) => {
-  const {error}= validateBlog(req.body);
-  // res.send("hi")
-  if(error){  
-    res.send(error.details[0].message);
-}
-  try {
-    const blog = await Blog.findOne({ _id: req.params.id });
-
-    if (req.body.title) {
-      blog.title = req.body.title;
-    }
-
-    if (req.body.image) {
-      blog.content = req.body.image;
-    }
-    if (req.body.content) {
-      blog.content = req.body.content;
-    }
-
-    await blog.save();
-    res.send(post);
-  } catch {
-    res.status(404);
-    res.send({ error: "Post doesn't exist!" });
-  }
-};
-
-module.exports.deleteblog=  async (req, res) => {
-  try {
-    await Blog.deleteOne({ _id: req.params.id });
-    res.status(204).send();
+    // const blog = await Blog.findOne({ _id: req.params.id });
+    Blog.findById(req.params.id, (err, blog) => {
+      if(err) res.send(err);
+      res.json(blog);
+  }); 
   } catch {
     res.status(404);
     res.send({ error: "Blog doesn't exist!" });
   }
 };
+
+export const updateblog=  (req, res) => {
+//   const {error}= validateBlog(req.body);
+//   if(error){  
+//     res.send(error.details[0].message);
+// }
+  try {
+    Blog.findById({_id: req.params.id}, (err, blog) => {
+      if(err) res.send(err);
+      Object.assign(blog, req.body).save((err, blog) => {
+        if(err) {res.send(err)};
+          res.json({ message: 'Blog updated!', blog });
+      });
+  });
+  } catch {
+    res.status(404);
+    res.send({ error: "Blog doesn't exist!" });
+  }
+};
+
+export const deleteblog=(req, res) => {
+     Blog.deleteOne({ _id: req.params.id }, (err, result) => {
+      res.json({ message: "Blog successfully deleted!", result });
+     
+});
+}

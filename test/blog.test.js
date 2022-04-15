@@ -1,11 +1,12 @@
 //During the test the env variable is set to test
 // process.env.NODE_ENV = 'test';
-let mongoose = require("mongoose");
-let Blog = require('../models/book');
-let chai = require('chai');
-let chaiHttp = require('chai-http');
-let server = require('../index');
+// let mongoose = require("mongoose");
+import Blog from '../models/blog.js';
+import chai from 'chai';
+import chaiHttp from 'chai-http';
+import server from '../index.js';
 let should = chai.should();
+// import should from 'should';
 chai.use(chaiHttp);
 //Наш основной блок
 describe('Blogs', () => {
@@ -22,6 +23,7 @@ describe('Blogs', () => {
         chai.request(server)
             .get('/blog')
             .end((err, res) => {
+              should.exist(res.body);
                 res.should.have.status(200);
                 res.body.should.be.a('array');
                 res.body.length.should.be.eql(0);
@@ -30,62 +32,59 @@ describe('Blogs', () => {
       });
   });
   describe('/POST blog', () => {
-    it('it should not POST a blog without pages field', (done) => {
-      let book = {
+    it('it should not POST a blog without image field', (done) => {
+      let blog = {
           title: "The Lord of the Rings",
-          author: "J.R.R. Tolkien",
-          year: 1954
+          content:"Content ofThe Lord of the Rings"
       }
       chai.request(server)
-          .post('/blogs')
-          .send(book)
+          .post('/Testblog')
+          .send(blog)
           .end((err, res) => {
+            // should.exist(res.body);
               res.should.have.status(200);
               res.body.should.be.a('object');
               res.body.should.have.property('errors');
-              res.body.errors.should.have.property('pages');
-              res.body.errors.pages.should.have.property('kind').eql('required');
+              res.body.errors.should.have.property('image');
+              res.body.errors.image.should.have.property('kind').eql('required');
             done();
           });
     });
-    
+    it('it should POST a blog ', (done) => {
+        let blog = {
+          title: "The Lord of the Rings",
+          image:"https://image.png",
+          content:"Content ofThe Lord of the Rings"
+        }
+        chai.request(server)
+            .post('/Testblog')
+            .send(blog)
+            .end((err, res) => {
+              should.exist(res.body);
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.should.have.property('message').eql('Blog successfully added!');
+                res.body.blog.should.have.property('title');
+                res.body.blog.should.have.property('image');
+                res.body.blog.should.have.property('content');
+              done();
+            });
+      })
 });
-it('it should POST a blog ', (done) => {
-    let book = {
-        title: "The Lord of the Rings",
-        author: "J.R.R. Tolkien",
-        year: 1954,
-        pages: 1170
-    }
-    chai.request(server)
-        .post('/blogs')
-        .send(book)
-        .end((err, res) => {
-            res.should.have.status(200);
-            res.body.should.be.a('object');
-            res.body.should.have.property('message').eql('Blog successfully added!');
-            res.body.book.should.have.property('title');
-            res.body.book.should.have.property('author');
-            res.body.book.should.have.property('pages');
-            res.body.book.should.have.property('year');
-          done();
-        });
-  })
   describe('/GET/:id blog', () => {
     it('it should GET a blog by given id', (done) => {
-      let book = new Blog({ title: "The Lord of the Rings", author: "J.R.R. Tolkien", year: 1954, pages: 1170 });
-      book.save((err, book) => {
+      let blog = new Blog({ title: "The Lord of the Rings", image:"https://image.png",content:"Content ofThe Lord of the Rings" });
+      blog.save((err, blog) => {
           chai.request(server)
-          .get('/blog/' + book.id)
-          .send(book)
+          .get('/blog/' + blog.id)
+          .send(blog)
           .end((err, res) => {
               res.should.have.status(200);
               res.body.should.be.a('object');
               res.body.should.have.property('title');
-              res.body.should.have.property('author');
-              res.body.should.have.property('pages');
-              res.body.should.have.property('year');
-              res.body.should.have.property('_id').eql(book.id);
+              res.body.should.have.property('image');
+              res.body.should.have.property('content');
+              res.body.should.have.property('_id').eql(blog.id);
             done();
           });
       });
@@ -93,11 +92,23 @@ it('it should POST a blog ', (done) => {
 });
 describe('/PUT/:id blog', () => {
     it('it should UPDATE a blog by given id', (done) => {
-      let book = new Blog({title: "The Chronicles of Narnia", author: "C.S. Lewis", year: 1948, pages: 778})
-      book.save((err, book) => {
+      let blog = new Blog(
+        {
+          title: "The Lord of the Rings", 
+          image:"https://image.png",
+          content:"Content ofThe Lord of the Rings"
+        }
+      )
+      blog.save((err, blog) => {
               chai.request(server)
-              .put('/blog/' + book.id)
-              .send({title: "The Chronicles of Narnia", author: "C.S. Lewis", year: 1950, pages: 778})
+              .put('/Testblog/' + blog.id)
+              .send(
+                {
+                  title: "The Chronicles of Narnia", 
+                  image:"https://updatesimage.png",
+                  content:"Content ofThe Chronicles of Narnia"
+                }
+              )
               .end((err, res) => {
                   res.should.have.status(200);
                   res.body.should.be.a('object');
@@ -109,10 +120,14 @@ describe('/PUT/:id blog', () => {
 });
 describe('/DELETE/:id blog', () => {
     it('it should DELETE a blog by given id', (done) => {
-      let book = new Blog({title: "The Chronicles of Narnia", author: "C.S. Lewis", year: 1948, pages: 778})
-      book.save((err, book) => {
+      let blog = new Blog({
+        title: "The Chronicles of Narnia", 
+        image:"https://updatesimage.png",
+        content:"Content ofThe Chronicles of Narnia"
+      })
+     blog.save((err, blog) => {
               chai.request(server)
-              .delete('/blog/' + book._id)
+              .delete('/Testblog/' + blog._id)
               .end((err, res) => {
                   res.should.have.status(200);
                   res.body.should.be.a('object');

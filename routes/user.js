@@ -1,15 +1,16 @@
-const express = require("express");
-const router = express.Router();
-const User=require("../models/user");
-const {validateUser}=require("../models/user");
-const bcrypt=require("bcryptjs");
-const auth = require("../middlewares/autha");
-const jwt=require('jsonwebtoken');
-router.get("/reg",async(req,res)=>{
+import express from 'express';
+import jwt from 'jsonwebtoken';
+const auth = express.Router();
+import User from "../models/user.js";
+import {validateUser} from "../models/user.js";
+import bcrypt from "bcryptjs";
+import autha from "../middlewares/autha.js";
+
+auth.get("/reg",async(req,res)=>{
     const user=await User.find();
     res.send(user);
 })
-router.post('/reg',async (req,res)=>{
+auth.post('/reg',async (req,res)=>{
     try{
         const {error}= validateUser(req.body);
         // res.send("hi")
@@ -50,7 +51,7 @@ router.post('/reg',async (req,res)=>{
         console.log(err);
     }
 })
-router.post('/log',async (req,res)=>{
+auth.post('/log',async (req,res)=>{
     try{
         //get user input
         const {email,password}=req.body;
@@ -83,7 +84,7 @@ router.post('/log',async (req,res)=>{
     }
 })
 
-router.post("/welcome", auth,async (req, res) => {
+auth.post("/welcome", auth,async (req, res) => {
     // const bruce="key";
 //   (err,authData)=>{
     // if(err){
@@ -95,7 +96,7 @@ router.post("/welcome", auth,async (req, res) => {
     // }
     // };
 });
-router.patch("/profile/:id",auth,async(req,res)=>{
+auth.patch("/profile/:id",autha,async(req,res)=>{
       try {
           const user = await User.findOne({ _id: req.params.id }); 
         //   email
@@ -176,5 +177,4 @@ router.patch("/profile/:id",auth,async(req,res)=>{
 
 
 
-
-module.exports=router;
+export default auth;

@@ -1,5 +1,5 @@
-const mongoose=require("mongoose");
-const Joi=require("joi")
+import mongoose from "mongoose"
+import Joi from 'joi';
 const userModel=new mongoose.Schema({
     first_name:{type:String,default:null},
     last_name:{type:String,default:null},
@@ -8,7 +8,8 @@ const userModel=new mongoose.Schema({
     token:{type:String},
     isadmin:{type:Boolean,default:false},
 })
-module.exports=mongoose.model("user",userModel);
+const User=mongoose.model("user",userModel);
+
 const validateUser=(prop)=>
 {
   try{
@@ -25,4 +26,6 @@ const validateUser=(prop)=>
 }
 
 }
-module.exports.validateUser=validateUser;
+// module.exports.validateUser=validateUser;
+export default User;
+export {validateUser};

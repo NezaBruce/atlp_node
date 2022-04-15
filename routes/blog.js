@@ -1,17 +1,20 @@
-const express = require("express");
-const router = express.Router();
-const {getall,createNew,commentblog,likeblog,getone,updateblog,deleteblog}=require("../controllers/blog");
-const auth = require("../middlewares/autha");
-const middlewarea = require("../middlewares/admina");
+import express from 'express';
+const Blog = express.Router();
+import {getall,createNew,commentblog,likeblog,getone,updateblog,deleteblog} from "../controllers/blog.js";
+import auth from "../middlewares/autha.js";
+import isAdmin from "../middlewares/admina.js";
 
-router.get("/blog",getall);
+Blog.get("/blog",getall);
 
-router.post("/blog",auth,middlewarea, createNew);
-router.patch("/comment/:id",auth,commentblog);
-router.patch("/like/:id",auth,likeblog);
-router.get("/blog/:id",getone);
+Blog.post("/blog",auth,isAdmin, createNew);
+Blog.patch("/comment/:id",auth,commentblog);
+Blog.patch("/like/:id",auth,likeblog);
+Blog.get("/blog/:id",getone);
 
-router.patch("/blog/:id",auth,updateblog);
+Blog.patch("/blog/:id",auth,updateblog);
 
-router.delete("/blog/:id",auth,deleteblog);
-module.exports = router;
+Blog.delete("/blog/:id",auth,deleteblog);
+Blog.post("/Testblog", createNew);
+Blog.put("/Testblog/:id",updateblog);
+Blog.delete("/Testblog/:id",deleteblog);
+export default Blog;

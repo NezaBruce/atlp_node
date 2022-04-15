@@ -22,13 +22,13 @@ const storage = multer.diskStorage({
   });
 
 router.get("/stories",  async (req, res) => {  
-    // #swagger.tags = ['Posts']
+    // #swagger.tags = ['Blogs']
     	  
     await getAll(req, res);
 });
 
 router.get("/stories/top",  async (req, res) => {  
-  // #swagger.tags = ['Posts']
+  // #swagger.tags = ['Blogs']
       
   await getTopStories(req, res);
 });
@@ -38,7 +38,7 @@ router.post("/stories", ensureAuthenticated, ensureAuthorized(["admin"]),
 );
 
 router.post("/stories", ensureAuthenticated, ensureAuthorized(["admin"]), validationRules(), validate, async (req, res) => {    
-    /*  #swagger.tags = ['Posts']
+    /*  #swagger.tags = ['Blogs']
         #swagger.consumes = ['multipart/form-data']
         #swagger.security = [{
         "Authorization": []
@@ -71,7 +71,7 @@ router.post("/stories", ensureAuthenticated, ensureAuthorized(["admin"]), valida
 });
 
 router.put("/stories/:id", ensureAuthenticated, ensureAuthorized(["admin"]), validationRules(), validate, async (req, res) => {    
-    /*  #swagger.tags = ['Posts']
+    /*  #swagger.tags = ['Blogs']
         #swagger.security = [{
         "Authorization": []
         }]
@@ -84,18 +84,18 @@ router.put("/stories/:id", ensureAuthenticated, ensureAuthorized(["admin"]), val
 });
 
 router.get("/stories/:id", async (req, res) => {  
-    // #swagger.tags = ['Posts']  
+    // #swagger.tags = ['Blogs']  
     await getOne(req, res);
 });
 
 router.get("/stories/slug/:slug", async (req, res) => {  
-  // #swagger.tags = ['Posts']  
+  // #swagger.tags = ['Blogs']  
   await getOneBySlug(req, res);
 });
 
 
 router.delete("/stories/:id", ensureAuthenticated, ensureAuthorized(["admin"]), async (req, res) => {    
-    /*  #swagger.tags = ['Posts']
+    /*  #swagger.tags = ['Blogs']
         #swagger.security = [{
         "Authorization": []
         }]
