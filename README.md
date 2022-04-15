@@ -13,7 +13,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/NezaBruce/my-_-brand-_-server/">
-    <img src="assets/about4" alt="Logo" width="80" height="80">
+    <img src="assets/about04.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Portfolio</h3>
