@@ -17,10 +17,16 @@ export const createNew= (req, res) => {
 //     res.send(error.details[0].message);
 // }
   var blog = new Blog({
-    title: req.body.title,
     image: req.body.image,
+    category: req.body.category,
+    title: req.body.title,
     content: req.body.content,
   });
+  // var blog = new Blog({
+  //   title: req.body.title,
+  //   image: req.body.image,
+  //   content: req.body.content,
+  // });
  blog.save(((err,blog) => {
     if(err) {
         res.send(err);

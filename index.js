@@ -17,12 +17,15 @@ const app = express()
 // const swaggerUi = import("swagger-ui-express")
 import swaggerUIExpress from "swagger-ui-express"
   // swaggerDoc = import("./swagger.json");
+  import fs from 'fs';
+
+const swaggerFile = JSON.parse(fs.readFileSync('./swagger_output.json'));
   mongoose
   .connect("mongodb+srv://bruce:bruce@cluster0.exmgv.mongodb.net/acmedb?retryWrites=true&w=majority", { useNewUrlParser: true })
   .then(() => {
 	  // Server.listen
     
-	  // app.use("/api-docs", swaggerUIExpress.serve, swaggerUIExpress.setup(swaggerFile));
+	  app.use("/api-docs", swaggerUIExpress.serve, swaggerUIExpress.setup(swaggerFile));
         app.use(express.json());
         app.use(express.static(path.join(__dirname, 'public')))
         app.set('views', path.join(__dirname, 'views'))

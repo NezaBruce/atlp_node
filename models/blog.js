@@ -1,9 +1,10 @@
 import mongoose from "mongoose"
 import Joi from 'joi';
 const BlogSchema =  mongoose.Schema({
-  title: { type: String, required: true },
-  image: { type: String, required: true },
-  content: { type: String, required: true },
+  image: { type: String },
+  category: { type: String },
+  title: { type: String },
+  content: { type: String },
   comments:[
     {
       user:{type:String},

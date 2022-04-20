@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.1.0",
+    "version": "1.0.0",
     "title": "Mybrand  API",
     "description": "API for my brand app by <b>Bruce</b> using NodeJS."
   },
@@ -27,6 +27,25 @@
     "application/json"
   ],
   "paths": {
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "bruce"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoginModel"
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
     "/auth/register": {
       "post": {
         "tags": [
@@ -141,6 +160,72 @@
         ]
       }
     },
+    "/api/comments": {
+      "post": {
+        "tags": [
+          "Comments"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommentModel"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/comments/{id}": {
+      "delete": {
+        "tags": [
+          "Posts"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
     "/api/profile": {
       "get": {
         "tags": [
@@ -198,15 +283,27 @@
         ]
       }
     },
-    "/blog": {
+    "/api/stories": {
       "get": {
         "tags": [
           "Blogs"
         ],
         "description": "",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "type": "string"
+          }
+        ],
         "responses": {
           "201": {
-            "description": "Success"
+            "description": "Created"
           },
           "500": {
             "description": "Internal Server Error"
@@ -223,7 +320,7 @@
         ],
         "parameters": [
           {
-            "name": "image",
+            "name": "file",
             "in": "formData",
             "required": true,
             "type": "file"
@@ -241,7 +338,7 @@
             "type": "string"
           },
           {
-            "name": "content",
+            "name": "body",
             "in": "formData",
             "required": true,
             "type": "string"
@@ -266,8 +363,8 @@
       }
     },
 
-    "/blog/{id}": {
-      "patch": {
+    "/api/stories/{id}": {
+      "put": {
         "tags": [
           "Blogs"
         ],
@@ -284,7 +381,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BlogModel"
+              "$ref": "#/definitions/StoryModel"
             }
           }
         ],
@@ -361,57 +458,23 @@
         ]
       }
     },
-    "/api/comments": {
-      "post": {
+    "/api/stories/slug/{slug}": {
+      "get": {
         "tags": [
-          "Comments"
+          "Blogs"
         ],
         "description": "",
         "parameters": [
           {
-            "name": "obj",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CommentModel"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
-      }
-    },
-    "/api/comments/{id}": {
-      "delete": {
-        "tags": [
-          "Comments"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
+            "name": "slug",
             "in": "path",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content"
+          "200": {
+            "description": "OK"
           },
           "404": {
             "description": "Not Found"
@@ -419,12 +482,7 @@
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
+        }
       }
     }
   },
