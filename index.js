@@ -24,6 +24,7 @@ const swaggerFile = JSON.parse(fs.readFileSync('./swagger_output.json'));
   .connect("mongodb+srv://bruce:bruce@cluster0.exmgv.mongodb.net/acmedb?retryWrites=true&w=majority", { useNewUrlParser: true })
   .then(() => {
 	  // Server.listen
+	  // heroku git:remote -a
     
 	  app.use("/api-docs", swaggerUIExpress.serve, swaggerUIExpress.setup(swaggerFile));
         app.use(express.json());
