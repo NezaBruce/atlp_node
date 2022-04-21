@@ -224,7 +224,7 @@
         "parameters": [
           {
             "name": "image",
-            "in": "formData",
+            "in": "body",
             "required": true,
             "type": "file"
           },     
