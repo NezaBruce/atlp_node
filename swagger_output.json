@@ -219,7 +219,8 @@
         ],
         "description": "",
         "consumes": [
-          "multipart/form-data"
+          "multipart/form-data",
+          "application/json"
         ],
         "parameters": [
           {
@@ -227,26 +228,16 @@
             "in": "formData",
             "required": true,
             "type": "file"
-          },
-          {
-            "name": "category",
-            "in": "formData",
+          },     
+          { 
+            "name": "obj",
+            "in": "body",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "title",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "content",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          }
-        ],
+            "schema": {
+            "$ref": "#/definitions/BlogModel"
+         }
+       }       
+       ],
         "responses": {
           "201": {
             "description": "Created"
@@ -491,7 +482,7 @@
           "type": "string",
           "example": "Elon Musk Admits He Wants to Travel to Mars Because No One Hates Him There Yet"
         },
-        "body": {
+        "content": {
           "type": "string",
           "example": "AUSTIN, Texas — Wiping tears from his eyes at a recent press conference, SpaceX CEO Elon Musk revealed that the reason he’s so keen on traveling to Mars is not for the potential benefits to science, but because it’s the one place he can think of where no one hates him yet."
         }
