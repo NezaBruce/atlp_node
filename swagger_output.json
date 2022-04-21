@@ -204,8 +204,8 @@
         ],
         "description": "",
         "responses": {
-          "201": {
-            "description": "Success"
+          "200": {
+            "description": "Query ok"
           },
           "500": {
             "description": "Internal Server Error"
