@@ -22,12 +22,14 @@ export const createNew= (req, res) => {
     title: req.body.title,
     content: req.body.content,
   });
+
+  const bloag=JSON.stringify(blog);
   // var blog = new Blog({
   //   title: req.body.title,
   //   image: req.body.image,
   //   content: req.body.content,
   // });
- blog.save(((err,blog) => {
+  bloag.save(((err,blog) => {
     if(err) {
         res.send(err);
     }
