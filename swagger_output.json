@@ -222,12 +222,6 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "name": "image",
-            "in": "body",
-            "required": true,
-            "type": "file"
-          },     
           { 
             "name": "obj",
             "in": "body",
