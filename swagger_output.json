@@ -219,7 +219,6 @@
         ],
         "description": "",
         "consumes": [
-          "multipart/form-data",
           "application/json"
         ],
         "parameters": [
