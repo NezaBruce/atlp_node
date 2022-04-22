@@ -17,8 +17,7 @@ export const createNew= (req, res) => {
 //     res.send(error.details[0].message);
 // }
   var blog = new Blog({
-...req.body,
-author:"Declan rice"
+...req.body
   });
 
   // const bloag=JSON.stringify(blog);
