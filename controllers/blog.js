@@ -17,7 +17,7 @@ export const createNew= (req, res) => {
 //     res.send(error.details[0].message);
 // }
   var blog = new Blog({
-...req.body
+...req.body,author:req.user.username
   });
 
   // const bloag=JSON.stringify(blog);

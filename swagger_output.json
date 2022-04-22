@@ -311,7 +311,7 @@
           }
         ],      
         "responses": {
-          "201": {
+          "200": {
             "description": "Created"
           },
           "404": {
@@ -480,24 +480,6 @@
           }
         }
       }
-    },
-    "/auth/reg":{
-      "get":{
-"tags":[
-  "Auth"
-],
-"responses": {
-  "204": {
-    "description": "No Content"
-  },
-  "404": {
-    "description": "Not Found"
-  },
-  "500": {
-    "description": "Internal Server Error"
-  }
-}
-}
     },
     "/api/comments/{id}": {
       "get": {
