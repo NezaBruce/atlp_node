@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 import Joi from 'joi';
 const BlogSchema =  mongoose.Schema({
-  image: { type: String },
+  image: { type: String,required:true },
   category: { type: String },
   title: { type: String },
   content: { type: String },

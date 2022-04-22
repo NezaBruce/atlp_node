@@ -7,6 +7,13 @@ const userModel=new mongoose.Schema({
     password:{type:String},
     token:{type:String},
     isadmin:{type:Boolean,default:false},
+    verificationCode: {
+      type: Number,
+    },
+   isEmailVerified: {
+      type: Boolean,
+      default: false,
+    },
 })
 const User=mongoose.model("user",userModel);
 

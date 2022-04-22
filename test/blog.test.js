@@ -10,27 +10,27 @@ let should = chai.should();
 chai.use(chaiHttp);
 //Наш основной блок
 describe('Blogs', () => {
-    // beforeEach((done) => { //Перед каждым тестом чистим базу
-    //     Blog.deleteMany({}, (err) => { 
-    //        done();         
-    //     });     
-    // });
+    beforeEach((done) => { //Перед каждым тестом чистим базу
+        Blog.deleteMany({}, (err) => { 
+           done();         
+        });     
+    });
 /*
   * Тест для /GET 
   */
-  // describe('/GET blog', () => {
-  //     it('it should GET all the blogs', (done) => {
-  //       chai.request(server)
-  //           .get('/blog')
-  //           .end((err, res) => {
-  //             should.exist(res.body);
-  //               res.should.have.status(200);
-  //               res.body.should.be.a('array');
-  //               res.body.length.should.be.eql(0);
-  //             done();
-  //           });
-  //     });
-  // });
+  describe('/GET blog', () => {
+      it('it should GET all the blogs', (done) => {
+        chai.request(server)
+            .get('/blog')
+            .end((err, res) => {
+              should.exist(res.body);
+                res.should.have.status(200);
+                res.body.should.be.a('array');
+                res.body.length.should.be.eql(0);
+              done();
+            });
+      });
+  });
   describe('/POST blog', () => {
     it('it should not POST a blog without image field', (done) => {
       let blog = {
