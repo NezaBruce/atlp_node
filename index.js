@@ -17,7 +17,7 @@ import swaggerUIExpress from "swagger-ui-express"
 
 const swaggerFile = JSON.parse(fs.readFileSync('./swagger_output.json'));
   mongoose
-  .connect("mongodb+srv://bruce:bruce@cluster0.exmgv.mongodb.net/acmedb-test?retryWrites=true&w=majority", { useNewUrlParser: true })
+  .connect("mongodb+srv://bruce:bruce@cluster0.exmgv.mongodb.net/acmedb?retryWrites=true&w=majority", { useNewUrlParser: true })
   .then(() => {
 	  // Server.listen
 	  // heroku git:remote -a

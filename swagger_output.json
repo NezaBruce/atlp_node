@@ -308,6 +308,11 @@
             "in": "formData",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "author",
+            "in": "formData",
+            "type": "string"
           }
 
         ],      
