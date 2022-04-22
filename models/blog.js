@@ -12,7 +12,8 @@ const BlogSchema =  mongoose.Schema({
     }
   ],
   author:{
-    type:new mongoose.Schema({name:String})
+    type:String,
+    // type:new mongoose.Schema({name:String})
   }
   ,
   like:[],
