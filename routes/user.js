@@ -54,8 +54,16 @@ auth.post('/register',async (req,res)=>{
         // const token = await jwt.sign({user_id:user._id,email},"key",{expiresIn:"4h"});
         //save token
         // user.token=token;
-        await user.save();
-        res.status(201).send(user);
+        user.save(
+            ((err,blog) => {
+            if(err) {
+                res.send(err);
+            }
+            else {
+                res.json({message: "User successfully added!", blog });
+            }
+        }));
+        // res.status(201).send(user);
     }catch(err){
         console.log(err);
     }

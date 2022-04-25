@@ -20,7 +20,6 @@ export const createNew= (req, res) => {
 ...req.body,
 author:"Declan rice"
   });
-
   // const bloag=JSON.stringify(blog);
   // var blog = new Blog({
   //   title: req.body.title,
