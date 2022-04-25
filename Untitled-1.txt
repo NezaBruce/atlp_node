@@ -1,0 +1,10 @@
+// "parameters": [
+//     { 
+//       "name": "obj",
+//       "in": "body",
+//       "required": true,
+//       "schema": {
+//       "$ref": "#/definitions/BlogModel"
+//    }
+//  }       
+//  ],

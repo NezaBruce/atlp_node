@@ -17,11 +17,16 @@ export const createNew= (req, res) => {
 //     res.send(error.details[0].message);
 // }
   var blog = new Blog({
-    title: req.body.title,
-    image: req.body.image,
-    content: req.body.content,
+...req.body,
+author:"Declan rice"
   });
- blog.save(((err,blog) => {
+  // const bloag=JSON.stringify(blog);
+  // var blog = new Blog({
+  //   title: req.body.title,
+  //   image: req.body.image,
+  //   content: req.body.content,
+  // });
+  blog.save(((err,blog) => {
     if(err) {
         res.send(err);
     }
@@ -49,19 +54,24 @@ const commentedBlog=await Blog.findByIdAndUpdate(id,{
 export const likeblog= async (req, res) => {
   // const blog=Blog.findOne({_id:req.params.id});
   const {id}=req.params;
-  const {like}=req.body;
+  // const {like}=req.body;
   const blog=await Blog.findById(id);
   const us=req.user.user_id;
 // blog.like =blog.like + like;
 // blog.like.push(us);
 if(blog){
 if(!blog.like.includes(req.user.user_id)){
-  await Blog.updateOne({_id:id},{
+ const likedBlog= await Blog.findByIdAndUpdate({_id:id},{
    $push:{like:req.user.user_id}
-  });
-return res.send("liked");
+  },{new:true});
+   res.json({message:"liked",likedBlog});
+}else{
+  const removeLike=await Blog.findByIdAndUpdate({_id:id},{
+    $pull:{like:req.user.user_id}
+  },{new:true})
+  res.json({message:"like removed", removeLike});
 }
-return res.send();
+// return res.send();
 }
 // return likedBlog
   // await blog.save();
@@ -97,10 +107,8 @@ export const updateblog=  (req, res) => {
     res.send({ error: "Blog doesn't exist!" });
   }
 };
-
 export const deleteblog=(req, res) => {
      Blog.deleteOne({ _id: req.params.id }, (err, result) => {
-      res.json({ message: "Blog successfully deleted!", result });
-     
+      res.json({ message: "Blog successfully deleted!", result });    
 });
 }

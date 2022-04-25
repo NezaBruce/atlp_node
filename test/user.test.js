@@ -9,7 +9,7 @@ let should = chai.should();
 // import should from 'should';
 chai.use(chaiHttp);
 //Наш основной блок
-describe('Blogs', () => {
+describe('Users management', () => {
     beforeEach((done) => { //Перед каждым тестом чистим базу
         Blog.deleteMany({}, (err) => { 
            done();         
@@ -18,10 +18,10 @@ describe('Blogs', () => {
 /*
   * Тест для /GET 
   */
-  describe('/GET blog', () => {
-      it('it should GET all the blogs', (done) => {
+  describe('/GET users', () => {
+      it('it should GET all users', (done) => {
         chai.request(server)
-            .get('/blog')
+            .get('/auth/users')
             .end((err, res) => {
               should.exist(res.body);
                 res.should.have.status(200);
@@ -31,8 +31,8 @@ describe('Blogs', () => {
             });
       });
   });
-  describe('/POST blog', () => {
-    it('it should not POST a blog without title field', (done) => {
+  describe('/Registeration', () => {
+    it('it should not register user without email field', (done) => {
       let blog = {
           title: "The Lord of the Rings",
           content:"Content ofThe Lord of the Rings"
@@ -50,7 +50,7 @@ describe('Blogs', () => {
             done();
           });
     });
-    it('it should not POST a blog without image field', (done) => {
+    it('it should not register user without password field', (done) => {
       let blog = {
           title: "The Lord of the Rings",
           content:"Content ofThe Lord of the Rings"
@@ -68,25 +68,7 @@ describe('Blogs', () => {
             done();
           });
     });
-    it('it should not POST a blog without content field', (done) => {
-      let blog = {
-          title: "The Lord of the Rings",
-          content:"Content ofThe Lord of the Rings"
-      }
-      chai.request(server)
-          .post('/Testblog')
-          .send(blog)
-          .end((err, res) => {
-            // should.exist(res.body);
-                res.should.have.status(200);
-              res.body.should.be.a('object');
-              res.body.should.have.property('errors');
-              res.body.errors.should.have.property('image');
-              res.body.errors.image.should.have.property('kind').eql('required');
-            done();
-          });
-    });
-    it('it should POST a blog ', (done) => {
+    it('it should register with valid credentials', (done) => {
         let blog = {
           title: "The Lord of the Rings",
           image:"https://image.png",
@@ -107,8 +89,8 @@ describe('Blogs', () => {
             });
       })
 });
-  describe('/GET/:id blog', () => {
-    it('it should GET a blog by given id', (done) => {
+  describe('/GET/:id user', () => {
+    it('it should GET a user by given id', (done) => {
       let blog = new Blog({ title: "The Lord of the Rings", image:"https://image.png",content:"Content ofThe Lord of the Rings" });
       blog.save((err, blog) => {
           chai.request(server)
@@ -126,8 +108,8 @@ describe('Blogs', () => {
       });
     });
 });
-describe('/PUT/:id blog', () => {
-    it('it should UPDATE a blog by given id', (done) => {
+describe('/PUT/:id user', () => {
+    it('it should UPDATE a user by given id', (done) => {
       let blog = new Blog(
         {
           title: "The Lord of the Rings", 
@@ -154,8 +136,27 @@ describe('/PUT/:id blog', () => {
         });
     });
 });
-describe('/DELETE/:id blog', () => {
-    it('it should DELETE a blog by given id', (done) => {
+describe('/auth/login user', () => {
+    it('it should authorize users who exists in database', (done) => {
+      let blog = new Blog({
+        title: "The Chronicles of Narnia", 
+        image:"https://updatesimage.png",
+        content:"Content ofThe Chronicles of Narnia"
+      })
+     blog.save((err, blog) => {
+              chai.request(server)
+              .delete('/Testblog/' + blog._id)
+              .end((err, res) => {
+                  res.should.have.status(200);
+                  res.body.should.be.a('object');
+                  res.body.should.have.property('message').eql('Blog successfully deleted!');
+                done();
+              });
+        });
+    });
+});
+describe('/auth/login user', () => {
+    it('it should provide valid token', (done) => {
       let blog = new Blog({
         title: "The Chronicles of Narnia", 
         image:"https://updatesimage.png",

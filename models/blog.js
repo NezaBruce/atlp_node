@@ -1,9 +1,10 @@
 import mongoose from "mongoose"
 import Joi from 'joi';
 const BlogSchema =  mongoose.Schema({
-  title: { type: String, required: true },
-  image: { type: String, required: true },
-  content: { type: String, required: true },
+  image: { type: String,required:true },
+  category: { type: String },
+  title: { type: String },
+  content: { type: String },
   comments:[
     {
       user:{type:String},
@@ -11,7 +12,8 @@ const BlogSchema =  mongoose.Schema({
     }
   ],
   author:{
-    type:new mongoose.Schema({name:String})
+    type:String,
+    // type:new mongoose.Schema({name:String})
   }
   ,
   like:[],

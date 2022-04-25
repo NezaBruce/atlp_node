@@ -1,15 +1,15 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.1.0",
+    "version": "1.0.0",
     "title": "Mybrand  API",
     "description": "API for my brand app by <b>Bruce</b> using NodeJS."
   },
-  "host": "my-branda.herokuapp.com",
+  "host": "localhost:7000",
   "basePath": "/",
   "schemes": [
-    "https",
-    "http"
+    "http",
+    "https"
   ],
   "securityDefinitions": {
     "Authorization": {
@@ -30,7 +30,7 @@
     "/auth/login": {
       "post": {
         "tags": [
-          "Auth"
+          "bruce"
         ],
         "description": "",
         "parameters": [
@@ -43,11 +43,7 @@
             }
           }
         ],
-        "responses": {
-          "200":{
-            "description":"Login successfully"
-          }
-        }
+        "responses": {}
       }
     },
     "/auth/register": {
@@ -67,12 +63,6 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "User registered successfully"
-          },
-          "409": {
-            "description": "User already Exist"
-          },
           "422": {
             "description": "Unprocessable Entity"
           }
@@ -92,6 +82,44 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/VerifyEmailModel"
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/auth/forgotPassword": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ForgotPassWordModel"
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/auth/resetPassword": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResetPasswordModel"
             }
           }
         ],
@@ -132,20 +160,79 @@
         ]
       }
     },
-    "/auth/profile/{id}": {
+    "/api/comments": {
+      "post": {
+        "tags": [
+          "Comments"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommentModel"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/comments/{id}": {
+      "delete": {
+        "tags": [
+          "Posts"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/profile": {
       "get": {
         "tags": [
           "Profile"
         ],
         "description": "",
-        "parameters": [
-          {
-            "name":"id",
-            "in":"path",
-            "type":"string",
-            "required":true
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
@@ -163,18 +250,12 @@
           }
         ]
       },
-      "patch": {
+      "put": {
         "tags": [
           "Profile"
         ],
         "description": "",
         "parameters": [
-          {
-            "name":"id",
-            "in":"path",
-            "type":"string",
-            "required":true
-          },
           {
             "name": "obj",
             "in": "body",
@@ -202,74 +283,27 @@
         ]
       }
     },
-    "/auth/users": {
-      "get": {
-        "tags": [
-          "Admin"
-        ],
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "Retrieved"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
-      }
-    },
-    "/auth/users/{id}": {
-      "get": {
-        "tags": [
-          "Admin"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
-      }
-    },
-    "/blog": {
+    "/api/stories": {
       "get": {
         "tags": [
           "Blogs"
         ],
         "description": "",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "type": "string"
+          }
+        ],
         "responses": {
-          "200": {
-            "description": "Query ok"
+          "201": {
+            "description": "Created"
           },
           "500": {
             "description": "Internal Server Error"
@@ -282,7 +316,7 @@
         ],
         "description": "",
         "consumes": [
-          "application/json"
+          "multipart/form-data"
         ],
         "parameters": [
           {
@@ -304,19 +338,15 @@
             "type": "string"
           },
           {
-            "name": "content",
+            "name": "body",
             "in": "formData",
             "required": true,
             "type": "string"
           }
-
-        ],      
+        ],
         "responses": {
-          "200": {
+          "201": {
             "description": "Created"
-          },
-          "404": {
-            "description": "Not Found"
           },
           "422": {
             "description": "Unprocessable Entity"
@@ -333,8 +363,8 @@
       }
     },
 
-    "/blog/{id}": {
-      "patch": {
+    "/api/stories/{id}": {
+      "put": {
         "tags": [
           "Blogs"
         ],
@@ -351,16 +381,13 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BlogModel"
+              "$ref": "#/definitions/StoryModel"
             }
           }
         ],
         "responses": {
           "201": {
-            "description": "Updated"
-          },
-          "404": {
-            "description": "Not Found"
+            "description": "Created"
           },
           "422": {
             "description": "Unprocessable Entity"
@@ -431,156 +458,31 @@
         ]
       }
     },
-    "/cont/contact/": {
+    "/api/stories/slug/{slug}": {
       "get": {
         "tags": [
-          "Admin"
-        ],
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "Retrieved"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
-      },
-      "post": {
-        "tags": [
-          "Contacts"
+          "Blogs"
         ],
         "description": "",
         "parameters": [
           {
-            "name": "obj",
-            "in": "body",
+            "name": "slug",
+            "in": "path",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/ContactModel"
-            }
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Query ok"
+            "description": "OK"
           },
-          "422": {
-            "description": "Unprocessable Entity"
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
           }
         }
-      }
-    },
-    "/api/comments/{id}": {
-      "get": {
-        "tags": [
-          "Blogs"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
-      },
-      "patch": {
-        "tags": [
-          "Blogs"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "obj",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CommentModel"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
-      }
-    },
-    "/api/likes/{id}":{
-      "patch":{
-        "tags":[
-          "Blogs"
-        ],
-        "parameters":[
-          {
-            "name":"id",
-            "in":"path",
-            "type":"string",
-            "required":true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Liked"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
       }
     }
   },
@@ -590,11 +492,11 @@
       "properties": {
         "email": {
           "type": "string",
-          "example": "john@gmail.com"
+          "example": "nezabruce@gmail.com.com"
         },
         "password": {
           "type": "string",
-          "example": "Password123"
+          "example": "Password123#"
         }
       },
       "required": [
@@ -605,17 +507,13 @@
     "RegisterModel": {
       "type": "object",
       "properties": {
-        "first_name": {
+        "name": {
           "type": "string",
-          "example": "John"
-        },
-        "last_name": {
-          "type": "string",
-          "example": "Snow"
+          "example": "John Snow"
         },
         "email": {
           "type": "string",
-          "example": "nezabruce@gmail.com"
+          "example": "mail@mail.com"
         },
         "password": {
           "type": "string",
@@ -631,54 +529,14 @@
     "UpdateUserModel": {
       "type": "object",
       "properties": {
-        "first_name": {
-          "type": "string",
-          "example": "John Snow"
-        },
-        "last_name": {
-          "type": "string",
-          "example": "John Snow"
-        },        
-        "email": {
-          "type": "string",
-          "example": "john@gmail.com"
-        }        
-      },
-      "required": [
-        "first_name",
-        "last_name",
-        "email"
-      ]
-    },
-    "ContactModel": {
-      "type": "object",
-      "properties": {
         "name": {
           "type": "string",
-          "example": "jonas blue"
-        },
-        "email": {
-          "type": "string",
-          "example": "john@gmail.com"
-        },
-        "message": {
-          "type": "string",
-          "example": "Hi bruce"
+          "example": "John Snow"
         }
       },
       "required": [
-        "email",
-        "password"
+        "name"
       ]
-    },
-    "CommentModel":{
-      "type":"object",
-      "properties":{
-       "comment":{
-         "type":"string",
-         "example":"nice one"
-       } 
-      }
     },
     "BlogModel": {
       "type": "object",
@@ -691,7 +549,7 @@
           "type": "string",
           "example": "Elon Musk Admits He Wants to Travel to Mars Because No One Hates Him There Yet"
         },
-        "content": {
+        "body": {
           "type": "string",
           "example": "AUSTIN, Texas — Wiping tears from his eyes at a recent press conference, SpaceX CEO Elon Musk revealed that the reason he’s so keen on traveling to Mars is not for the potential benefits to science, but because it’s the one place he can think of where no one hates him yet."
         }
@@ -699,6 +557,23 @@
       "required": [
         "category",
         "title",
+        "body"
+      ]
+    },
+    "CommentModel": {
+      "type": "object",
+      "properties": {
+        "story": {
+          "type": "string",
+          "example": "606576d16bb28e33ecf2872c"
+        },
+        "body": {
+          "type": "string",
+          "example": "That's very funny (:"
+        }
+      },
+      "required": [
+        "story",
         "body"
       ]
     },
@@ -719,15 +594,49 @@
       "properties": {
         "oldPassword": {
           "type": "string",
-          "example": "Password123"
+          "example": "Password123#"
         },
         "newPassword": {
           "type": "string",
-          "example": "Password789"
+          "example": "Password789#"
         }
       },
       "required": [
         "oldPassword",
+        "newPassword"
+      ]
+    },
+    "ForgotPassWordModel": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "coommark@gmail.com"
+        }
+      },
+      "required": [
+        "email"
+      ]
+    },
+    "ResetPasswordModel": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "coommark@gmail.com"
+        },
+        "code": {
+          "type": "number",
+          "example": 999999
+        },
+        "newPassword": {
+          "type": "string",
+          "example": "Password789#"
+        }
+      },
+      "required": [
+        "email",
+        "code",
         "newPassword"
       ]
     }
