@@ -41,3 +41,6 @@ const swaggerFile = JSON.parse(fs.readFileSync('./swagger_output.json'));
   export default app;
   
   // "host": "my-branda.herokuapp.com",
+  // "testa": "mocha --timeout 10000",
+  // "dev-test": "--exec \"npm run testa\"",
+  // "test-watch": "nodemon --exec \"npm test\"",

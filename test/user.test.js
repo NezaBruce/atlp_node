@@ -170,6 +170,7 @@ describe('/auth/login user', () => {
                 done();
               });
         });
+        // setTimeout(done, 250);
     });
 });
 });

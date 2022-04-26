@@ -6,8 +6,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "test": "mocha --timeout 10000",
-    "coverage": "nyc --reporter=text npm test"
+    "test": "mocha --timeout 10000 --exit"
+
   },
   "keywords": [],
   "author": "",
