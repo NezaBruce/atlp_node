@@ -2,6 +2,7 @@ import mongoose from "mongoose"
 import Joi from 'joi';
 const BlogSchema =  mongoose.Schema({
   image: { type: String,required:true },
+  cloudinary_id: { type: String,required:true },
   category: { type: String },
   title: { type: String },
   content: { type: String },

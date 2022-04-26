@@ -5,7 +5,7 @@
     "title": "Mybrand  API",
     "description": "API for my brand app by <b>Bruce</b> using NodeJS."
   },
-  "host": "my-branda.herokuapp.com",
+  "host": "localhost:7000",
   "basePath": "/",
   "schemes": [
     "https",
@@ -286,7 +286,7 @@
         ],
         "parameters": [
           {
-            "name": "file",
+            "name": "image",
             "in": "formData",
             "required": true,
             "type": "file"
@@ -590,11 +590,11 @@
       "properties": {
         "email": {
           "type": "string",
-          "example": "john@gmail.com"
+          "example": "rice@gmail.com"
         },
         "password": {
           "type": "string",
-          "example": "Password123"
+          "example": "rice12"
         }
       },
       "required": [

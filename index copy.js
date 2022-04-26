@@ -41,3 +41,4 @@ const swaggerFile = JSON.parse(fs.readFileSync('./swagger_output.json'));
   export default app;
   
   // "host": "my-branda.herokuapp.com",
+  
