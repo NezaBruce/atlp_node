@@ -112,3 +112,8 @@ export const deleteblog=(req, res) => {
       res.json({ message: "Blog successfully deleted!", result });    
 });
 }
+// cloudinary.config({ 
+//   cloud_name: 'inezabruce', 
+//   api_key: '916588765219796', 
+//   api_secret: 'IAwW3x8JzbUQvrPTjNnnWMkBy0I' 
+// });

@@ -8,6 +8,9 @@ import multer from 'multer';
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 const PATH =  "../public/phots/"
+ 
+import cloudinary from 'cloudinary';
+
 Blog.get("/blog",getall);
 
 // Blog.post("/blog",auth,isAdmin, createNew);
@@ -30,11 +33,38 @@ const storage = multer.diskStorage({
     },
   });
   const upload = multer({
-    storage: storage,
+    storage: multer.diskStorage({}),
+    fileFilter:(req,file,cb)=>{
+      let ext=path.extname(file.originalname);
+      if (ext !== ".jpg" && ext !== ".jpeg" && ext !== ".png") {
+        cb(new Error("File type is not supported"), false);
+        return;
+      }
+      cb(null, true)
+    },
   });
-Blog.post("/blog", 
-  upload.any("files")
-);
+  const clod=cloudinary.v2;
+  clod.config({ 
+      cloud_name: 'inezabruce', 
+      api_key: '916588765219796', 
+      api_secret: 'IAwW3x8JzbUQvrPTjNnnWMkBy0I' 
+  });
+  
+Blog.post("/blog",
+  upload.single("image"),
+  async (req,res)=>{
+    try{
+      const result =await clod.uploader.upload(req.file.path);
+      // {result.public_id,result.secure_url} 
+      req.body.image=result.secure_url;
+      req.body.cloudinary_id=result.public_id;
+      console.log(req.body.image);
+      createNew(req,res);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+); 
 Blog.post("/blog",auth,isAdmin, async (req,res)=>{
     createNew(req,res);
 });

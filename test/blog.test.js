@@ -1,6 +1,3 @@
-//During the test the env variable is set to test
-// process.env.NODE_ENV = 'test';
-// let mongoose = require("mongoose");
 import Blog from '../models/blog.js';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
@@ -90,7 +87,8 @@ describe('Blogs', () => {
         let blog = {
           title: "The Lord of the Rings",
           image:"https://image.png",
-          content:"Content ofThe Lord of the Rings"
+          content:"Content ofThe Lord of the Rings",
+          cloudinary_id:"zhnzzvgf1kd6ajyfzvxx"
         }
         chai.request(server)
             .post('/Testblog')
@@ -109,7 +107,7 @@ describe('Blogs', () => {
 });
   describe('/GET/:id blog', () => {
     it('it should GET a blog by given id', (done) => {
-      let blog = new Blog({ title: "The Lord of the Rings", image:"https://image.png",content:"Content ofThe Lord of the Rings" });
+      let blog = new Blog({ title: "The Lord of the Rings", image:"https://image.png",content:"Content ofThe Lord of the Rings",cloudinary_id:"zhnzzvgf1kd6ajyfzvxx" });
       blog.save((err, blog) => {
           chai.request(server)
           .get('/blog/' + blog.id)
@@ -132,7 +130,8 @@ describe('/PUT/:id blog', () => {
         {
           title: "The Lord of the Rings", 
           image:"https://image.png",
-          content:"Content ofThe Lord of the Rings"
+          content:"Content ofThe Lord of the Rings",
+          cloudinary_id:"zhnzzvgf1kd6ajyfzvxx"
         }
       )
       blog.save((err, blog) => {
@@ -142,7 +141,8 @@ describe('/PUT/:id blog', () => {
                 {
                   title: "The Chronicles of Narnia", 
                   image:"https://updatesimage.png",
-                  content:"Content ofThe Chronicles of Narnia"
+                  content:"Content ofThe Chronicles of Narnia",
+                  cloudinary_id:"zhnzzvgf1kd6ajyfzvxx"
                 }
               )
               .end((err, res) => {
@@ -159,7 +159,8 @@ describe('/DELETE/:id blog', () => {
       let blog = new Blog({
         title: "The Chronicles of Narnia", 
         image:"https://updatesimage.png",
-        content:"Content ofThe Chronicles of Narnia"
+        content:"Content ofThe Chronicles of Narnia",
+        cloudinary_id:"zhnzzvgf1kd6ajyfzvxx"
       })
      blog.save((err, blog) => {
               chai.request(server)
