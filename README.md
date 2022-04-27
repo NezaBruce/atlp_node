@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/circleci/my-_-brand-__server.svg?style=svg)](https://circleci.com/gh/circleci/my-_-brand-__server)
+[![CircleCI](https://circleci.com/gh/NezaBruce/my-_-brand-_-server.svg?style=svg)](https://circleci.com/gh/NezaBruce/my-_-brand-_-server)
 <br />
 <div align="center">
   <h3 align="center">Portfolio</h3>
