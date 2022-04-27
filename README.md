@@ -1,9 +1,6 @@
+[![CircleCI](https://circleci.com/gh/circleci/my-_-brand-__server.svg?style=svg)](https://circleci.com/gh/circleci/my-_-brand-__server
 <br />
 <div align="center">
-  <a href="https://github.com/NezaBruce/my-_-brand-_-server/">
-    <img src="assets/about04.png" alt="Logo" width="80" height="80">
-  </a>
-
   <h3 align="center">Portfolio</h3>
 
   <p align="center">
@@ -12,17 +9,6 @@
   </p>
 </div>
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-My personal portfolio.
-
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 ### Built With
 
@@ -30,11 +16,6 @@ My personal portfolio.
 <!-- * [Ejs](https://ejs.co/) -->
 * [Mocha](https://mochajs.org/)
 * [Swagger](https://swagger.io/)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
 <!-- GETTING STARTED -->
 ## Getting Started
 
