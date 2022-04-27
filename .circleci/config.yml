@@ -16,10 +16,12 @@ jobs:
       - checkout
       - run:
           name: "Install npm dependencies"
-          command: npm install --save
+          command: |
+            npm install --save
       - run:
           name: "Run unit tests"
-          command: ./node_modules/mocha/bin/mocha test/  
+          command: |
+            ./node_modules/mocha/bin/mocha test/  
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
