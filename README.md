@@ -23,7 +23,7 @@
 
 1. Clone the repo
    ```sh
-  https://github.com/NezaBruce/my-_-brand-_-server.git
+   https://github.com/NezaBruce/my-_-brand-_-server.git
    ```
 2. Install NPM packages
    ```sh
