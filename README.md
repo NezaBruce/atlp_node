@@ -1,5 +1,4 @@
-[![CircleCI](https://circleci.com/gh/NezaBruce/my-_-brand-_-server.svg?style=shield)](https://circleci.com/gh/NezaBruce/my-_-brand-_-server)
-[![codecov.io](https://codecov.io/github/NezaBruce/my-_-brand-_-server/coverage.svg?branch=main)](https://codecov.io/github/NezaBruce/my-_-brand-_-server)
+[![CircleCI](https://circleci.com/gh/NezaBruce/my-_-brand-_-server.svg?style=svg)](https://circleci.com/gh/NezaBruce/my-_-brand-_-server)
 <br />
 
 ### Built With
