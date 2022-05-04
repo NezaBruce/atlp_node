@@ -7,13 +7,14 @@
   "scripts": {
     "start": "nodemon index.js",
     "test": "mocha --timeout 10000 --exit",
-    "coverage": "nyc --reporter=lcov --reporter=text npm test"
+    "coverage": "c8 npm test"
 
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "c8": "^7.11.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
     "chai-http": "^4.3.0",
