@@ -1,7 +1,7 @@
 import Blog from '../models/blog.js';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import server from '../index.js';
+import server from './index.js';
 // More than ever, it is vital for Africa to prepare her youth for the digital economy and the future of work. The World Development Report 2019 notes that the labour market of the future will require new skills including digital fluency, creative thinking, problem-solving, collaboration, empathy and adaptability. With these new demands in place, it would be remiss of Africa not to strengthen her biggest asset: the youth who make up around 60% of the continent’s population.
 
 // Appropriate action will help the continent to harness this promising demographic dividend. Furthermore, a proactive stance is likely to reduce the risk of massive labour substitution and endemic unemployment, while enabling the continent to leverage the new entrepreneurial and economic opportunities associated with the digital economy.

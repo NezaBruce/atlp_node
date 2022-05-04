@@ -16,6 +16,7 @@ import swaggerUIExpress from "swagger-ui-express"
   import fs from 'fs';
 
 const swaggerFile = JSON.parse(fs.readFileSync('./swagger_output.json'));
+// html and nodejs integration by using fetch function
   mongoose
   .connect("mongodb+srv://bruce:bruce@cluster0.exmgv.mongodb.net/acmedb-test?retryWrites=true&w=majority", { useNewUrlParser: true })
   .then(() => {

@@ -42,6 +42,8 @@ const storage = multer.diskStorage({
       }
       cb(null, true)
     },
+    //a0h5mrhh
+    //https://api.cloudinary.com/v1_1/inezabruce/image/upload
   });
   const clod=cloudinary.v2;
   clod.config({ 
@@ -54,10 +56,11 @@ Blog.post("/blog",
   upload.single("image"),
   async (req,res)=>{
     try{
-      const result =await clod.uploader.upload(req.file.path);
+      // const result =await clod.uploader.upload(req.file.path);
       // {result.public_id,result.secure_url} 
-      req.body.image=result.secure_url;
-      req.body.cloudinary_id=result.public_id;
+      // req.body.image=result.secure_url;
+      req.body.cloudinary_id="result.public_id";
+      req.body.category="Tech";
       console.log(req.body.image);
       createNew(req,res);
     } catch (err) {
@@ -65,20 +68,32 @@ Blog.post("/blog",
     }
   }
 ); 
-Blog.post("/blog",auth,isAdmin, async (req,res)=>{
+Blog.post("/blog", async (req,res)=>{
     createNew(req,res);
 });
-Blog.patch("/api/likes/:id",auth,likeblog);
-Blog.patch("/api/comments/:id",auth,commentblog);
-Blog.get("/api/comments/:id",auth,getone);
+Blog.patch("/blog/:id/likes",likeblog);
+Blog.patch("/api/:id/comments",commentblog);
+Blog.get("/api/:id/comments",getone);
+Blog.get("/api/:id/comments",(req,res)=>{
+  try {
+    // const blog = await Blog.findOne({ _id: req.params.id });
+    Blog.findById(req.params.id, (err, blog) => {
+      if(err) res.send(err);
+      res.json(blog);
+  }); 
+  } catch {
+    res.status(404);
+    res.send({ error: "Blog doesn't exist!" });
+  }
+});
 // Blog.patch("/blog/:id",likeblog);
 Blog.get("/blog/:id",getone);
 
-Blog.patch("/blog/:id",auth,isAdmin,updateblog);
-// Blog.patch("/blog/:id",auth,updateblog);
+// Blog.patch("/blog/:id",auth,isAdmin,updateblog);
+Blog.patch("/blog/:id",updateblog);
 
-Blog.delete("/blog/:id",auth,isAdmin,deleteblog);
-// Blog.delete("/blog/:id",auth,deleteblog);
+// Blog.delete("/blog/:id",auth,isAdmin,deleteblog);
+Blog.delete("/blog/:id",deleteblog);
 Blog.post("/Testblog",createNew);
 Blog.put("/Testblog/:id",updateblog);
 Blog.delete("/Testblog/:id",deleteblog);

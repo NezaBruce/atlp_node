@@ -13,7 +13,7 @@ let query = Book.find({});
 }
 /*
  * POST /book для создания новой книги.
- */
+//  */https://my-branda.herokuapp.com/api-docs/
 function postBook(req, res) {
 //   var newBook = new Book(req.body);
   var newBook = new Book({
