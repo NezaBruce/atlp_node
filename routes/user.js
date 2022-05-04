@@ -4,7 +4,7 @@ const auth = express.Router();
 import User from "../models/user.js";
 import {validateUser} from "../models/user.js";
 import bcrypt from "bcryptjs";
-import autha from "../middlewares/autha.js";
+// import autha from "../middlewares/autha.js";
 import crypto from "crypto"
 
 auth.get("/users",async(req,res)=>{
@@ -135,31 +135,31 @@ auth.post("/verify", async(req,res)=>{
             })
         }
 })
-auth.post("/changePassword",autha,async (req,res)=>{
-        try { 
-            let { oldPassword, newPassword } = req.body;
-            const user = await User.findById(req.user.user_id);
-            let isMatch = await bcrypt.compare(oldPassword, user.password);
-            if(isMatch) {
-                const hashedPassword = await bcrypt.hash(newPassword, 10);
-                await user.update({password: hashedPassword});
-                return res.status(201).json({
-                    message: "Your password has been successfully reset",
-                    success: true
-                }); 
-            } else {
-                return res.status(404).json({
-                    message: "Your old password is incorrect",
-                    success: false
-                }); 
-            }
-        } catch (err) {
-            return res.status(500).json({
-                message: err.message,
-                success: false
-            })
-    };
-})
+// auth.post("/changePassword",autha,async (req,res)=>{
+//         try { 
+//             let { oldPassword, newPassword } = req.body;
+//             const user = await User.findById(req.user.user_id);
+//             let isMatch = await bcrypt.compare(oldPassword, user.password);
+//             if(isMatch) {
+//                 const hashedPassword = await bcrypt.hash(newPassword, 10);
+//                 await user.update({password: hashedPassword});
+//                 return res.status(201).json({
+//                     message: "Your password has been successfully reset",
+//                     success: true
+//                 }); 
+//             } else {
+//                 return res.status(404).json({
+//                     message: "Your old password is incorrect",
+//                     success: false
+//                 }); 
+//             }
+//         } catch (err) {
+//             return res.status(500).json({
+//                 message: err.message,
+//                 success: false
+//             })
+//     };
+// })
 auth.post("/welcome", auth,async (req, res) => {
     // const bruce="key";
 //   (err,authData)=>{

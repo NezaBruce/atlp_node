@@ -1,12 +1,12 @@
 import express from 'express';
 const Blog = express.Router();
 import {getall,createNew,commentblog,likeblog,getone,updateblog,deleteblog} from "../controllers/blog.js";
-import auth from "../middlewares/autha.js";
-import isAdmin from "../middlewares/admina.js";
+// import auth from "../middlewares/autha.js";
+// import isAdmin from "../middlewares/admina.js";
 import path from 'path';
 import multer from 'multer';
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
+// import { createRequire } from "module";
+// const require = createRequire(import.meta.url);
 const PATH =  "../public/phots/"
  
 import cloudinary from 'cloudinary';
