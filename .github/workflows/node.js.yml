@@ -32,7 +32,7 @@ jobs:
     - name: Run tests
       run: npm run coverage
     
-    - name: "Upload coverage report"
+    - name: "Upload coverage reportA"
       run: |
        ci_env=`curl -s https://codecov.io/env`
        npm install codecov -g
