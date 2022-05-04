@@ -14,7 +14,6 @@ const BlogSchema =  mongoose.Schema({
   ],
   author:{
     type:String,
-    // type:new mongoose.Schema({name:String})
   }
   ,
   like:[],
@@ -26,7 +25,7 @@ const BlogSchema =  mongoose.Schema({
 
 const Blog = mongoose.model('Blog', BlogSchema)
 
-// module.exports = Blog;
+
 const validateBlog=(prop)=>
 {
   try{
@@ -41,6 +40,8 @@ const validateBlog=(prop)=>
 
 }
 
-// module.exports.validateBlog=validateBlog;
+
 export default Blog;
 export {validateBlog};
+
+
