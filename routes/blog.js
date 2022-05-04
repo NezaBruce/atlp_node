@@ -98,4 +98,3 @@ Blog.post("/Testblog",createNew);
 Blog.put("/Testblog/:id",updateblog);
 Blog.delete("/Testblog/:id",deleteblog);
 export default Blog;
-// my day was good, and I have managed to finalize swagger documentation and i tried to work on testing badge but it didn't work hence travis ci need credit card and that was my blocker. Eloi in next
