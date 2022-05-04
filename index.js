@@ -21,6 +21,8 @@ const swaggerFile = JSON.parse(fs.readFileSync('./swagger_output.json'));
   .then(() => {
 	  // heroku git:remote -a
     
+
+    
 	  app.use("/api-docs", swaggerUIExpress.serve, swaggerUIExpress.setup(swaggerFile));
         app.use(cors());
         app.use(express.json());
