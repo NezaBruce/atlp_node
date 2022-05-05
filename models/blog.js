@@ -1,5 +1,5 @@
-import mongoose from "mongoose"
-import Joi from 'joi';
+const mongoose = require ("mongoose")
+const Joi = require('joi');
 const BlogSchema =  mongoose.Schema({
   image: { type: String,required:true },
   cloudinary_id: { type: String,required:true },
@@ -41,7 +41,7 @@ const validateBlog=(prop)=>
 }
 
 
-export default Blog;
-export {validateBlog};
+module.exports = Blog;
+// export {validateBlog};
 
 
