@@ -3,7 +3,6 @@ const Blog = express.Router();
 const {getall,createNew,commentblog,likeblog,getone,updateblog,deleteblog}=require("../controllers/blog");
 const path =require('path');
 const multer = require('multer');
-const require = createRequire(import.meta.url);
 const PATH =  "../public/phots/"
 
 Blog.get("/blog",getall);
