@@ -1,5 +1,5 @@
-import express from 'express';
-import contactModel from '../models/contact.js';
+const express = require('express');
+const contactModel = require('../models/contact.js');
 const contact = express.Router();
 
 const fun=(()=>{
@@ -28,4 +28,4 @@ const fun=(()=>{
 //     }
 // });
 // });
-export default contact;
+module.exports = contact;
