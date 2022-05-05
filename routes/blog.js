@@ -1,26 +1,27 @@
-import express from 'express';
+const express = require('express');
 const Blog = express.Router();
-import {getall,createNew,commentblog,likeblog,getone,updateblog,deleteblog} from "../controllers/blog.js";
+// import {getall,createNew,commentblog,likeblog,getone,updateblog,deleteblog} from "../controllers/blog.js";
+const {getall,createNew,commentblog,likeblog,getone,updateblog,deleteblog}=require("../controllers/blog");
 // import auth from "../middlewares/autha.js";
 // import isAdmin from "../middlewares/admina.js";
-import path from 'path';
-import multer from 'multer';
+const path =require('path');
+const multer = require('multer');
 // import { createRequire } from "module";
 // const require = createRequire(import.meta.url);
 const PATH =  "../public/phots/"
  
-import cloudinary from 'cloudinary';
+const cloudinary = require('cloudinary');
 
 Blog.get("/blog",getall);
 
 // Blog.post("/blog",auth,isAdmin, createNew);
 // Blog.patch("/comment/:id",auth,commentblog);
 // Blog.patch("/likes/:id",auth,likeblog);
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+// import { fileURLToPath } from 'url';
+// import { dirname } from 'path';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = dirname(__filename);
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
       cb(null, path.join(__dirname, PATH));
@@ -97,4 +98,4 @@ Blog.delete("/blog/:id",deleteblog);
 Blog.post("/Testblog",createNew);
 Blog.put("/Testblog/:id",updateblog);
 Blog.delete("/Testblog/:id",deleteblog);
-export default Blog;
+module.exports = Blog;
