@@ -1,12 +1,12 @@
-import Blog from "../models/blog.js";
-export const getall= (req, res) => {
+const Blog = require("../models/blog.js");
+module.exports.getall= (req, res) => {
   let query = Blog.find({});
   query.exec((err, Blogs) => {
     if(err) res.send(err);
     res.json(Blogs);
 });
 };
-export const createNew= (req, res) => {
+module.exports.createNew= (req, res) => {
   var blog = new Blog({
 ...req.body,
 author:"Declan rice"
@@ -20,7 +20,7 @@ author:"Declan rice"
     }
 }))
 };
-export const commentblog= async (req, res) => {
+module.exports.commentblog= async (req, res) => {
   const {id}=req.params;
   const {comment}=req.body;
   const commentedBlog=await Blog.findByIdAndUpdate(id,{
@@ -33,7 +33,7 @@ export const commentblog= async (req, res) => {
 },{new:true});
   res.send(commentedBlog);
 };
-export const likeblog= async (req, res) => {
+module.exports.likeblog= async (req, res) => {
   const {id}=req.params;
   const blog=await Blog.findById(id);
   const us=req.user.user_id;
@@ -51,7 +51,7 @@ if(!blog.like.includes(req.user.user_id)){
 }
 }
 };
-export const getone = async (req, res) => {
+module.exports.getone = async (req, res) => {
   try {
     Blog.findById(req.params.id, (err, blog) => {
       if(err) res.send(err);
@@ -62,7 +62,7 @@ export const getone = async (req, res) => {
     res.send({ error: "Blog doesn't exist!" });
   }
 }
-export const updateblog=  (req, res) => {
+module.exports.updateblog=  (req, res) => {
   try {
     Blog.findById({_id: req.params.id}, (err, blog) => {
       if(err) res.send(err);
@@ -76,9 +76,9 @@ export const updateblog=  (req, res) => {
     res.send({ error: "Blog doesn't exist!" });
   }
 };
-export const deleteblog=(req, res) => {
+module.exports.deleteblog=(req, res) => {
      Blog.deleteOne({ _id: req.params.id }, (err, result) => {
       res.json({ message: "Blog successfully deleted!", result });    
 });
 }
-    // export{createNew,updateblog,deleteblog,likeblog,getall,getone,commentblog};
+    // export{createNew,updateblog,deleteblog,likeblog,getall,getone,commentblog}
