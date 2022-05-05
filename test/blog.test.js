@@ -1,7 +1,7 @@
-import Blog from '../models/blog.js';
-import chai from 'chai';
-import chaiHttp from 'chai-http';
-import server from '../index.js';
+const Blog = require('../models/blog.js');
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const server = require('../index.js');
 let should = chai.should();
 // import should from 'should';
 chai.use(chaiHttp);
