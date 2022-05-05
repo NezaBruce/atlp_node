@@ -1,8 +1,8 @@
-const express = require ('express')
-const cors = require ('cors')
-const mongoose= require ("mongoose")
-const contact = require ("./controllers/contact.js")
-const Blog = require ("./routes/test.js")
+const express = require ('express');
+const cors = require ('cors');
+const mongoose= require ("mongoose");
+const contact = require ("./controllers/contact.js");
+const Blog = require ("./routes/test.js");
 const path = require ('path');
 
 const port = process.env.PORT ||  7000;
