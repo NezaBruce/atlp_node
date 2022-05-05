@@ -1,5 +1,4 @@
-import mongoose from "mongoose"
-
+const mongoose = require("mongoose")
 const schema = mongoose.Schema({
   name: {type:String,required:true},
   email:{type:String,required:true},
@@ -7,4 +6,4 @@ const schema = mongoose.Schema({
 });
 
 const contactModel = mongoose.model("contact", schema);
-export default contactModel
+module.exports =contactModel;
