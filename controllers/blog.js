@@ -26,7 +26,7 @@ module.exports.commentblog= async (req, res) => {
   const commentedBlog=await Blog.findByIdAndUpdate(id,{
  $push:{
    comments:{
-     user:"12368790hio8y80",
+     user:user.user_id,
      comments:comment,
    }
   } 
@@ -37,18 +37,11 @@ module.exports.likeblog= async (req, res) => {
   const {id}=req.params;
   const blog=await Blog.findById(id);
   const us=req.user.user_id;
-if(blog){
-if(!blog.like.includes(req.user.user_id)){
+if(blog && !blog.like.includes(req.user.user_id)){
  const likedBlog= await Blog.findByIdAndUpdate({_id:id},{
    $push:{like:req.user.user_id}
   },{new:true});
    res.json({message:"liked",likedBlog});
-}else{
-  const removeLike=await Blog.findByIdAndUpdate({_id:id},{
-    $pull:{like:req.user.user_id}
-  },{new:true})
-  res.json({message:"like removed", removeLike});
-}
 }
 };
 module.exports.getone = async (req, res) => {
