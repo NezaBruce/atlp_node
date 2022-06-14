@@ -13,7 +13,7 @@
 <!-- GETTING STARTED -->
 ## Getting Started
 
-### Prerequisites
+### Prerequisite
 
 * npm
   ```sh
